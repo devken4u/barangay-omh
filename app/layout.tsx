@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BRGY OMH",
+  title: "BRGY 174 OMH",
   description: "Barangay Operations And Monitoring Hub",
 };
 
