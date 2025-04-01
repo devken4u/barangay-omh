@@ -1,5 +1,13 @@
+"use client";
+
+import { toast } from "sonner";
+
 function HomePage() {
-  return <div>page</div>;
+  return (
+    <div>
+      homepage
+    </div>
+  );
 }
 
 export default HomePage;

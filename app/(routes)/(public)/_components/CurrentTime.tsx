@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 export default function CurrentTime() {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,7 +16,7 @@ export default function CurrentTime() {
   return (
     <div className="text-center p-4 text-lg text-background">
       <span className="font-bold">Philippines Time: </span>
-      <span>{time.toLocaleTimeString()}</span>
+      <span>{time ? time.toLocaleTimeString() : "Loading..."}</span>
     </div>
   );
 }

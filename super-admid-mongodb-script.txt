@@ -1,0 +1,13 @@
+db.users.insertOne({
+  email: 'barangay.OMH@gmail.com', 
+  password: '$2y$12$/hJ9UNF3Cw.8uzkHdU4fQu0qpdno5ptaFvi2gFZ8Wfe48CwtL4FhO', 
+  role: 'super-admin',
+  permissions: '*',
+  email_type: 'credentials',
+  is_verified: true,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+});
+
+password: omh-admin
+cost: 12

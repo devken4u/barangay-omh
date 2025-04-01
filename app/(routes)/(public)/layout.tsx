@@ -1,6 +1,6 @@
 import PublicHeader from "./_components/PublicHeader";
 
-function layout({
+async function layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
