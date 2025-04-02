@@ -7,12 +7,13 @@ import { Label } from "@/components/ui/label";
 import { signInGoogle } from "@/app/actions/auth";
 import { signInCredentials } from "@/app/actions/auth";
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [error, setError] = useState("hereqweqwe");
+  const [error, setError] = useState("");
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,14 +35,13 @@ export function LoginForm({
         <p className="text-muted-foreground text-sm text-balance">
           Enter your email below to login to your account
           <br />
-          {error}
         </p>
       </div>
       <div className="grid gap-6">
         {/* credentials login */}
         <form className="grid gap-3" onSubmit={onSubmit}>
+          <Label htmlFor="email">Email</Label>
           <div>
-            <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
@@ -62,6 +62,7 @@ export function LoginForm({
               </a>
             </div>
             <Input name="password" id="password" type="password" required />
+            {error && <span className="text-destructive text-sm">{error}</span>}
           </div>
           <Button type="submit" className="w-full cursor-pointer">
             Login
@@ -90,9 +91,9 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <a href="#" className="underline underline-offset-4">
+        <Link href="/register" className="underline underline-offset-4">
           Sign up
-        </a>
+        </Link>
       </div>
     </div>
   );
