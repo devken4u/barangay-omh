@@ -58,7 +58,10 @@ export async function registerUserAction(_1: any, formData: FormData) {
 }
 
 export async function getUserByEmailAction(email: string) {
-  const user = await getUserByEmail(email);
-  if (user) return user;
-  return null;
+  return await getUserByEmail(email);
+}
+
+export async function isEmailVerificationPendingAction(){
+  // check if there is a pending verification here
+  // if none send new
 }
