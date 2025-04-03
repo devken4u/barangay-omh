@@ -8,6 +8,9 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    password: {
+      type: String,
+    },
     email_type: {
       type: String,
       enum: ["google", "credentials"],

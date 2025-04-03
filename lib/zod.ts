@@ -1,6 +1,6 @@
 import { object, string, date } from "zod";
-
-export const signInSchema = object({
+import z from "zod";
+export const SignInSchema = object({
   email: string({ required_error: "Email is required" })
     .min(1, "Email is required")
     .email("Invalid email"),
@@ -9,8 +9,7 @@ export const signInSchema = object({
     "Password is required"
   ),
 });
-
-export const registerSchema = object({
+export const RegisterSchema = object({
   firstname: string({ required_error: "First name is required" }).min(
     1,
     "First name is required"
@@ -28,3 +27,4 @@ export const registerSchema = object({
   message: "Passwords do not match",
   path: ["confirmPassword"],
 });
+export type RegisterType = z.infer<typeof RegisterSchema>;

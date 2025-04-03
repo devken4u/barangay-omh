@@ -7,17 +7,11 @@ export async function signInGoogle() {
   await signIn("google");
 }
 
-export async function signInCredentials({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) {
+export async function signInCredentials(_1: any, formData: FormData) {
   try {
     await signIn("credentials", {
-      email,
-      password,
+      email: formData.get("email"),
+      password: formData.get("password"),
       redirectTo: "/",
     });
   } catch (error) {
@@ -25,11 +19,15 @@ export async function signInCredentials({
       switch (error.type) {
         case "CredentialsSignin":
           return {
-            message: "Invalid credentials.",
+            email: formData.get("email"),
+            password: formData.get("password"),
+            errorMessage: "Invalid credentials.",
           };
         default:
           return {
-            message: "Something went wrong.",
+            email: formData.get("email"),
+            password: formData.get("password"),
+            errorMessage: "Something went wrong.",
           };
       }
     }

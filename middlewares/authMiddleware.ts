@@ -1,8 +1,7 @@
 import { auth } from "@/auth";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export default async function authMiddleware(request: Request){
-
+export default async function authMiddleware(request: NextRequest) {
   // get the session from auth
   // this holds the logged user information
   const session = await auth();
@@ -11,6 +10,6 @@ export default async function authMiddleware(request: Request){
   // if session is empty, no one is logged in
   // otherwise, a resident or admin is logged in
 
-  if(!session) return NextResponse.redirect(new URL("/login", request.url)); // redirect if no one is logged in
+  if (!session) return NextResponse.redirect(new URL("/login", request.url)); // redirect if no one is logged in
   return NextResponse.next(); // Continue to the next middleware if the validation passed
 }

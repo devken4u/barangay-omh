@@ -6,27 +6,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signInGoogle } from "@/app/actions/auth";
 import { signInCredentials } from "@/app/actions/auth";
-import { FormEvent, useState } from "react";
+import { useActionState } from "react";
+import { Loader } from "lucide-react";
 import Link from "next/link";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [error, setError] = useState("");
-
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const result = await signInCredentials({
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-    });
-    if (result?.message) {
-      setError(result.message);
-    }
-  }
+  const [state, action, isPending] = useActionState(signInCredentials, null);
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -39,7 +27,7 @@ export function LoginForm({
       </div>
       <div className="grid gap-6">
         {/* credentials login */}
-        <form className="grid gap-3" onSubmit={onSubmit}>
+        <form className="grid gap-3" action={action}>
           <Label htmlFor="email">Email</Label>
           <div>
             <Input
@@ -48,6 +36,7 @@ export function LoginForm({
               name="email"
               placeholder="m@example.com"
               required
+              defaultValue={state?.email as string}
             />
           </div>
 
@@ -61,10 +50,25 @@ export function LoginForm({
                 Forgot your password?
               </a>
             </div>
-            <Input name="password" id="password" type="password" required />
-            {error && <span className="text-destructive text-sm">{error}</span>}
+            <Input
+              name="password"
+              id="password"
+              type="password"
+              required
+              defaultValue={state?.password as string}
+            />
+            {state?.errorMessage && (
+              <span className="text-destructive text-sm">
+                {state.errorMessage}
+              </span>
+            )}
           </div>
-          <Button type="submit" className="w-full cursor-pointer">
+          <Button
+            type="submit"
+            className="w-full cursor-pointer"
+            disabled={isPending}
+          >
+            {isPending && <Loader className="animate-spin" />}
             Login
           </Button>
         </form>

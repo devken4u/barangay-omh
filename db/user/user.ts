@@ -17,11 +17,19 @@ export async function getUserByEmail(email: string) {
 export async function createUser({
   email,
   firstname = "",
+  middlename = "",
+  lastname = "",
+  birthday = "",
   role = "user",
   email_type,
+  password = "",
 }: {
   email: string;
-  firstname?: string;
+  password?: string;
+  firstname: string;
+  middlename?: string;
+  lastname?: string;
+  birthday?: Date | "";
   role?: "super-admin" | "user" | "admin";
   email_type: "google" | "credentials";
 }) {
@@ -30,13 +38,18 @@ export async function createUser({
     await connectDB();
 
     // create the new user
-    await UserModel.create({
+    const newUser = await UserModel.create({
       email,
       firstname,
+      middlename,
+      lastname,
+      birthday,
       role,
       email_type,
+      password,
     });
+    return newUser;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }

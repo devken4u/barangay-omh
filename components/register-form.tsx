@@ -4,9 +4,18 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FormEvent, useState } from "react";
+import {
+  FormEvent,
+  useActionState,
+  useState,
+  startTransition,
+  useEffect,
+} from "react";
 import Link from "next/link";
-import { registerSchema } from "@/lib/zod";
+import { RegisterSchema } from "@/lib/zod";
+import { RegisterType } from "@/lib/zod";
+import { registerUserAction } from "@/app/actions/user";
+import { Loader } from "lucide-react";
 
 export function RegisterForm({
   className,
@@ -22,20 +31,24 @@ export function RegisterForm({
     confirmPassword: "",
   });
 
+  const [state, action, isPending] = useActionState(registerUserAction, null);
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
 
-    const result = registerSchema.safeParse({
-      firstname: formData.get("firstname"),
-      middlename: formData.get("middlename"),
-      lastname: formData.get("lastname"),
-      birthday: new Date(formData.get("birthday") as string),
-      email: formData.get("email"),
-      password: formData.get("password"),
-      confirmPassword: formData.get("confirmPassword"),
-    });
+    const user: RegisterType = {
+      firstname: (formData.get("firstname") as string) ?? "",
+      middlename: (formData.get("middlename") as string) ?? "",
+      lastname: (formData.get("lastname") as string) ?? "",
+      birthday: new Date(formData.get("birthday") as string) ?? "",
+      email: (formData.get("email") as string) ?? "",
+      password: (formData.get("password") as string) ?? "",
+      confirmPassword: (formData.get("confirmPassword") as string) ?? "",
+    };
+
+    const result = RegisterSchema.safeParse(user);
 
     if (result.error) {
       setErrors(() => {
@@ -62,8 +75,23 @@ export function RegisterForm({
           confirmPassword: "",
         };
       });
+
+      startTransition(() => {
+        action(formData);
+      });
     }
   }
+
+  useEffect(() => {
+    if (state?.error.message) {
+      setErrors((prev) => {
+        return {
+          ...prev,
+          email: state.error.message,
+        };
+      });
+    }
+  }, [state]);
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -184,7 +212,12 @@ export function RegisterForm({
             )}
           </div>
 
-          <Button type="submit" className="w-full cursor-pointer">
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="w-full cursor-pointer"
+          >
+            {isPending && <Loader className="animate-spin" />}
             Register
           </Button>
         </form>

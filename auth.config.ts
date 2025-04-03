@@ -2,7 +2,7 @@ import type { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { getUserByEmail, createUser } from "./db/user/user";
-import { signInSchema } from "./lib/zod";
+import { SignInSchema } from "./lib/zod";
 import { ZodError } from "zod";
 import bcrypt from "bcryptjs";
 
@@ -18,7 +18,7 @@ export const authConfig = {
           let user = null;
 
           // validate fields with zod
-          const { email, password } = await signInSchema.parseAsync(
+          const { email, password } = await SignInSchema.parseAsync(
             credentials
           );
 
