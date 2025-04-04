@@ -6,7 +6,7 @@ let cached = (global as any).mongoose || { conn: null, promise: null };
 
 export async function connectDB() {
   if (!MONGO_URI) {
-    throw new Error("MONGO_URI is not defined in .env.local");
+    throw new Error("MONGO_URI is not defined in environment variables");
   }
 
   if (cached.conn) {

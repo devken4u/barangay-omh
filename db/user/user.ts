@@ -23,12 +23,14 @@ export async function createUser({
   role = "user",
   email_type,
   password = "",
+  is_verified = false,
 }: {
   email: string;
   password?: string;
   firstname: string;
   middlename?: string;
   lastname?: string;
+  is_verified?: boolean;
   birthday?: Date | "";
   role?: "super-admin" | "user" | "admin";
   email_type: "google" | "credentials";
@@ -47,6 +49,7 @@ export async function createUser({
       role,
       email_type,
       password,
+      is_verified,
     });
     return newUser;
   } catch (error) {

@@ -65,6 +65,7 @@ export const authConfig = {
             email: user.email,
             firstname: user.name!,
             email_type: "google",
+            is_verified: true,
           });
         }
       }

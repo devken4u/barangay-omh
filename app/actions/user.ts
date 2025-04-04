@@ -6,6 +6,11 @@ import { RegisterType } from "@/lib/zod";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/db/user/user";
 import { redirect } from "next/navigation";
+import { getTokenByUserEmail } from "@/db/emailVerificationToken/emailVerificationToken";
+import { verifyToken } from "@/lib/utils";
+import { signToken } from "@/lib/utils";
+import { insertNewVerificationToken } from "@/db/emailVerificationToken/emailVerificationToken";
+import { sendMail } from "@/lib/mail";
 
 export async function registerUserAction(_1: any, formData: FormData) {
   const user: RegisterType = {
@@ -61,7 +66,116 @@ export async function getUserByEmailAction(email: string) {
   return await getUserByEmail(email);
 }
 
-export async function isEmailVerificationPendingAction(){
+export async function isEmailVerificationPendingAction(email: string) {
   // check if there is a pending verification here
   // if none send new
+  const emailVerification = await getTokenByUserEmail(email);
+
+  if (!emailVerification) {
+    return false;
+  }
+  // check token if not expired
+  const result = verifyToken(emailVerification.token as string);
+  if (result) {
+    return true;
+  }
+  return false;
+}
+
+export async function generateEmailVerificationToken(email: string) {
+  const token = signToken({ payload: { email } });
+
+  // insert token and email in the db
+  const result = await insertNewVerificationToken({
+    email,
+    token: token as string,
+  });
+
+  // if success, send email
+  if (result) {
+    const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+    if (!BASE_URL) {
+      throw new Error("BASE_URL is not defined in environment variables");
+    }
+
+    const message = `<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Email Verification</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              background-color: #f4f4f4;
+              margin: 0;
+              padding: 0;
+          }
+          .container {
+              max-width: 600px;
+              margin: 20px auto;
+              background-color: #ffffff;
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+              text-align: center;
+          }
+          h1 {
+              color: #333333;
+          }
+          p {
+              color: #666666;
+              font-size: 16px;
+          }
+          .button {
+              display: inline-block;
+              padding: 12px 24px;
+              background-color: #ff6900;
+              color: #ffffff;
+              text-decoration: none;
+              font-size: 18px;
+              border-radius: 5px;
+              margin-top: 20px;
+          }
+
+          .footer {
+              margin-top: 20px;
+              font-size: 14px;
+              color: #999999;
+          }
+      </style>
+  </head>
+  <body>
+
+  <div class="container">
+      <h1>Verify Your Email</h1>
+      <p>Thank you for signing up! Please verify your email address by clicking the button below.</p>
+      
+      <a href="https://youtube.com" style="
+                display: inline-block;
+                font-size: 16px;
+                color: #ffffff !important;
+                text-decoration: none;
+                padding: 12px 24px;
+                border-radius: 5px;
+                font-weight: bold;
+            " class="button" target="_blank">Verify Email</a>
+
+      <p>If you did not create an account, you can safely ignore this email.</p>
+
+      <div class="footer">
+          <p>&copy; 2025 Barangay 175 OMH. All rights reserved.</p>
+      </div>
+  </div>
+
+  </body>
+  </html>
+  `;
+
+    await sendMail({
+      to: email,
+      subject: "Verify Your Email Address",
+      message,
+    });
+  }
 }
