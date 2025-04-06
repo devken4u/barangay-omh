@@ -1,5 +1,4 @@
 import { CircleUserRound } from "lucide-react";
-import Link from "next/link";
 import React from "react";
 import { auth } from "@/auth";
 import UserMenu from "./UserMenu";
@@ -7,17 +6,18 @@ import UserMenu from "./UserMenu";
 async function AuthButton() {
   const session = await auth();
 
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
   return (
     <div>
       {!session ? (
-        <Link
-          
-          href="/login"
+        <a
+          href={`${BASE_URL}/login`}
           className="bg-background text-primary px-4 py-2 rounded-full font-semibold flex gap-2 items-center active:scale-95 shadow-md"
         >
           <CircleUserRound />
           LOGIN
-        </Link>
+        </a>
       ) : (
         <UserMenu />
       )}

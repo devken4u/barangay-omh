@@ -2,7 +2,6 @@ import { verifyToken } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import { resetUserPasswordAction } from "@/app/actions/user";
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
-import Link from "next/link";
 import { getPasswordResetTokenByUserEmail } from "@/db/passwordResetToken/passwordResetToken";
 
 function generateCode(): string {
@@ -20,6 +19,8 @@ function generateCode(): string {
 }
 
 async function page({ params }: { params: { email: string; token: string } }) {
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
   const { email, token } = await params;
 
   // check if user has pending password reset
@@ -58,12 +59,12 @@ async function page({ params }: { params: { email: string; token: string } }) {
               After you logged in, change your password for better security.
             </span>
           </h2>
-          <Link className="underline" href="/login">
+          <a className="underline" href={`${BASE_URL}/login`}>
             Go To Login
-          </Link>
+          </a>
         </div>
       </div>
-    );w
+    );
   } else {
     return (
       <div className="w-screen h-screen flex flex-col items-center bg-orange-200 p-4">
@@ -72,9 +73,9 @@ async function page({ params }: { params: { email: string; token: string } }) {
           <h1 className="font-semibold text-2xl text-center">
             Reset Password Link Expired
           </h1>
-          <Link className="underline" href="/login">
+          <a className="underline" href={`${BASE_URL}/login`}>
             Go To Login
-          </Link>
+          </a>
         </div>
       </div>
     );

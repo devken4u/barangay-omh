@@ -1,4 +1,4 @@
-import { CircleUserRound, LogOut } from "lucide-react";
+import { CircleUserRound, LogOut, SquareUserRound } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +14,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOutAccount } from "@/app/actions/auth";
+import { auth } from "@/auth";
 
-function UserMenu() {
+async function UserMenu() {
+  const session = await auth();
+
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
+  const dashboardLink =
+    session?.user.role === "user" ? "/user/dashboard" : "/admin/dashboard";
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,12 +31,33 @@ function UserMenu() {
           <CircleUserRound className="size-8" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent className="min-w-56" align="end">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem>profile</DropdownMenuItem>
+        <DropdownMenuItem>
+          <div className="flex items-center gap-2">
+            <CircleUserRound className="size-10" />
+            <div className="grid grid-cols-1">
+              <span className="font-semibold">{session?.user.email}</span>
+              <span>{session?.user.role}</span>
+            </div>
+          </div>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem>
+          <a
+            target="_blank"
+            href={BASE_URL + dashboardLink}
+            className="flex gap-2 items-center font-bold size-full cursor-pointer"
+          >
+            <SquareUserRound className="text-foreground" />
+            Dashboard
+          </a>
+        </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 

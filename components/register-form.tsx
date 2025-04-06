@@ -11,7 +11,6 @@ import {
   startTransition,
   useEffect,
 } from "react";
-import Link from "next/link";
 import { RegisterSchema } from "@/lib/zod";
 import { RegisterType } from "@/lib/zod";
 import { registerUserAction } from "@/app/actions/user";
@@ -22,6 +21,7 @@ export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
   const [errors, setErrors] = useState({
     firstname: "",
     middlename: "",
@@ -223,9 +223,9 @@ export function RegisterForm({
 
       <div className="text-center text-sm">
         Already have an account?{" "}
-        <Link href="/login" className="underline underline-offset-4">
+        <a href={`${BASE_URL}/login`} className="underline underline-offset-4">
           Login
-        </Link>
+        </a>
       </div>
     </div>
   );

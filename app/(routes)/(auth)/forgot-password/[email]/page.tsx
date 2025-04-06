@@ -4,10 +4,11 @@ import {
   isEmailValidToResetPasswordAction,
 } from "@/app/actions/user";
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function page({ params }: { params: { email: string } }) {
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
   const { email } = await params;
 
   const formData = new FormData();
@@ -35,9 +36,9 @@ export default async function page({ params }: { params: { email: string } }) {
             {decodeURIComponent(email)}
           </span>{" "}
         </h2>
-        <Link className="underline" href="/login">
+        <a className="underline" href={`${BASE_URL}/login`}>
           Go To Login
-        </Link>
+        </a>
       </div>
     </div>
   );

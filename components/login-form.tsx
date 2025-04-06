@@ -8,13 +8,13 @@ import { signInGoogle } from "@/app/actions/auth";
 import { signInCredentials } from "@/app/actions/auth";
 import { useActionState } from "react";
 import { Loader } from "lucide-react";
-import Link from "next/link";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const [state, action, isPending] = useActionState(signInCredentials, null);
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -43,12 +43,12 @@ export function LoginForm({
           <div className="grid gap-3">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
-              <Link
-                href="/forgot-password"
+              <a
+                href={`${BASE_URL}/forgot-password`}
                 className="ml-auto text-sm underline-offset-4 hover:underline"
               >
                 Forgot your password?
-              </Link>
+              </a>
             </div>
             <Input
               name="password"
@@ -95,9 +95,12 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="underline underline-offset-4">
+        <a
+          href={`${BASE_URL}/register`}
+          className="underline underline-offset-4"
+        >
           Sign up
-        </Link>
+        </a>
       </div>
     </div>
   );

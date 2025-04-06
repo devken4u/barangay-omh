@@ -13,10 +13,25 @@ export default function CurrentTime() {
     return () => clearInterval(interval);
   }, []);
 
+  const formatTime = (date: Date) => {
+    return new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Manila",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    }).format(date);
+  };
+
   return (
     <div className="text-center p-4 text-lg text-background">
       <span className="font-bold">Philippines Time: </span>
-      <span>{time ? time.toLocaleTimeString() : "Loading..."}</span>
+      <span className="underline">
+        {time ? formatTime(time) : "Loading..."}
+      </span>
     </div>
   );
 }

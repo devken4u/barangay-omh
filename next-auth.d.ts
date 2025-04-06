@@ -4,6 +4,7 @@ declare module "next-auth" {
   interface User extends DefaultUser {
     is_verified?: boolean;
     email_type?: string;
+    role?: "user" | "admin" | "super-admin";
   }
 
   interface Session {
@@ -13,5 +14,6 @@ declare module "next-auth" {
   interface JWT {
     is_verified?: boolean;
     email_type?: string;
+    role?: "user" | "admin" | "super-admin";
   }
 }

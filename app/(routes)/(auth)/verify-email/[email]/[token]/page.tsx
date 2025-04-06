@@ -2,9 +2,10 @@ import { verifyToken } from "@/lib/utils";
 import { verifyUserEmail } from "@/db/user/user";
 import { redirect } from "next/navigation";
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
-import Link from "next/link";
 
 async function page({ params }: { params: { token: string } }) {
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
   const { token } = await params;
 
   const isValid = verifyToken(token);
@@ -21,9 +22,9 @@ async function page({ params }: { params: { token: string } }) {
           <h2 className="text-center">
             Thank you for verifying your email.
             <br />
-            <Link href="/login" className="underline">
+            <a className="underline" href={`${BASE_URL}/login`}>
               Go To Login
-            </Link>
+            </a>
           </h2>
         </div>
       </div>

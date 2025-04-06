@@ -5,11 +5,12 @@ import { Button } from "@/components/ui/button";
 import { useActionState } from "react";
 import { isEmailValidToResetPasswordAction } from "@/app/actions/user";
 import { Loader } from "lucide-react";
-import Link from "next/link";
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
 import { redirect } from "next/navigation";
 
 export default function page() {
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
   const [state, action, isPending] = useActionState(
     isEmailValidToResetPasswordAction,
     null
@@ -46,9 +47,9 @@ export default function page() {
             Reset
           </Button>
         </form>
-        <Link className="underline" href="/login">
+        <a className="underline" href={`${BASE_URL}/login`}>
           Back To Login
-        </Link>
+        </a>
       </div>
     </div>
   );

@@ -96,6 +96,23 @@ export const authConfig = {
       });
       return true;
     },
+    async session({ session, token }) {
+      // Attach custom data to session
+      session.user.is_verified = token.is_verified as boolean;
+      session.user.role = token.role as
+        | "admin"
+        | "super-admin"
+        | "user"
+        | undefined;
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.is_verified = user.is_verified;
+        token.role = user.role;
+      }
+      return token;
+    },
   },
   pages: {
     signIn: "/login",
