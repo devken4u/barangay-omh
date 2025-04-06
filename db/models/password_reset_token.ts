@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema, model, models } = mongoose;
 
-const emailVerificationTokenSchema = new Schema(
+const passwordResetToken = new Schema(
   {
     email: {
       type: String,
@@ -19,7 +19,7 @@ const emailVerificationTokenSchema = new Schema(
   }
 );
 
-const EmailVerificationTokenModel =
-  models?.EmailVerificationToken ||
-  model("EmailVerificationToken", emailVerificationTokenSchema);
-export default EmailVerificationTokenModel;
+const PasswordVerificationModel =
+  models?.PasswordVerification ||
+  model("PasswordVerification", passwordResetToken);
+export default PasswordVerificationModel;

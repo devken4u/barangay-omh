@@ -30,7 +30,7 @@ export function verifyToken(token: string) {
   }
 
   try {
-    return jwt.verify(token, JWT_PRIVATE_KEY);
+    return jwt.verify(token, JWT_PRIVATE_KEY) as { email: string };
   } catch (error) {
     return false;
   }

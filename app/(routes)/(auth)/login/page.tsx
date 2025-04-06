@@ -1,5 +1,3 @@
-import { GalleryVerticalEnd } from "lucide-react";
-
 import { LoginForm } from "@/components/login-form";
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
 import Link from "next/link";

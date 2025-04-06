@@ -16,6 +16,7 @@ import { RegisterSchema } from "@/lib/zod";
 import { RegisterType } from "@/lib/zod";
 import { registerUserAction } from "@/app/actions/user";
 import { Loader } from "lucide-react";
+import { redirect } from "next/navigation";
 
 export function RegisterForm({
   className,
@@ -83,13 +84,17 @@ export function RegisterForm({
   }
 
   useEffect(() => {
-    if (state?.error.message) {
-      setErrors((prev) => {
-        return {
-          ...prev,
-          email: state.error.message,
-        };
-      });
+    if (state) {
+      if (state.error.message) {
+        setErrors((prev) => {
+          return {
+            ...prev,
+            email: state.error.message,
+          };
+        });
+      } else {
+        redirect(`/verify-email/${state.user.email}`);
+      }
     }
   }, [state]);
 
@@ -119,7 +124,6 @@ export function RegisterForm({
               </span>
             )}
           </div>
-
           <div>
             <Label htmlFor="middlename">Middle name</Label>
             <Input
@@ -134,7 +138,6 @@ export function RegisterForm({
               </span>
             )}
           </div>
-
           <div>
             <Label htmlFor="lastname">Last name</Label>
             <Input
@@ -149,7 +152,6 @@ export function RegisterForm({
               </span>
             )}
           </div>
-
           <div>
             <Label htmlFor="birthday">Birthday</Label>
             <Input
@@ -165,7 +167,6 @@ export function RegisterForm({
               </span>
             )}
           </div>
-
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
@@ -179,7 +180,6 @@ export function RegisterForm({
               <span className="text-sm text-destructive">{errors.email}</span>
             )}
           </div>
-
           <div>
             <Label htmlFor="password">Password</Label>
             <Input
@@ -195,7 +195,6 @@ export function RegisterForm({
               </span>
             )}
           </div>
-
           <div>
             <Label htmlFor="confirmPassword">Confirm Password</Label>
             <Input
@@ -211,7 +210,6 @@ export function RegisterForm({
               </span>
             )}
           </div>
-
           <Button
             disabled={isPending}
             type="submit"

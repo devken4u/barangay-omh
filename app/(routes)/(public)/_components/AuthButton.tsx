@@ -11,6 +11,7 @@ async function AuthButton() {
     <div>
       {!session ? (
         <Link
+          
           href="/login"
           className="bg-background text-primary px-4 py-2 rounded-full font-semibold flex gap-2 items-center active:scale-95 shadow-md"
         >
