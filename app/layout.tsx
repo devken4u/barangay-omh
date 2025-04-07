@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { Toaster } from "@/components/ui/sonner";
-
-// import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 import "./(routes)/globals.css";
 import { SessionProvider } from "next-auth/react";
@@ -33,8 +31,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Toaster position="top-right" reverseOrder={true} />
         <SessionProvider>{children}</SessionProvider>
-        <Toaster position="bottom-right" expand={true} richColors />
       </body>
     </html>
   );
