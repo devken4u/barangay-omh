@@ -24,13 +24,25 @@ export default function FeaturedPhotoForm() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+
+    const MAX_SIZE_MB = 20; // adjust as needed
+    const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+
+    if (!file) return;
+
+    if (file.size > MAX_SIZE_BYTES) {
+      toast.error(`File is too large. Max size is ${MAX_SIZE_MB}MB.`, {
+        duration: 4000,
+      });
+      e.target.value = "";
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
   };
 
   useEffect(() => {
