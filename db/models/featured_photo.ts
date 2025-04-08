@@ -11,6 +11,15 @@ const FeaturedPhotoSchema = new Schema(
       type: String,
       required: true,
     },
+    numerical_order: {
+      type: Number,
+      unique: true,
+      required: true,
+    },
+    hidden: {
+      type: Boolean,
+      default: false,
+    },
     uploaded_by: {
       type: String,
       required: true,

@@ -35,3 +35,11 @@ export function verifyToken(token: string) {
     return false;
   }
 }
+
+export function formateDateV1(date: string) {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}

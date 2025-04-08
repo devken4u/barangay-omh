@@ -3,6 +3,8 @@ export type FeaturedPhoto = {
   url: string;
   public_id: string;
   uploaded_by: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
+  hidden: boolean;
+  numerical_order: number;
 };

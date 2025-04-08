@@ -15,8 +15,14 @@ import {
 } from "@/components/ui/sidebar";
 import FeaturedPhotoList from "./_components/FeaturedPhotoList";
 import FeaturedPhotoForm from "./_components/FeaturedPhotoForm";
+import {
+  redirectIfNotAuthenticated,
+  redirectIfRoleNotAuthorized,
+} from "@/lib/page-guard";
 
-export default function page() {
+export default async function page() {
+  await redirectIfNotAuthenticated("/");
+  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
   return (
     <SidebarProvider>
       <AdminSidebar />
