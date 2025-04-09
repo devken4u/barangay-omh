@@ -41,11 +41,11 @@ const data = {
         },
         {
           title: "Announcement",
-          url: "#",
+          url: "/admin/dashboard/announcement",
         },
         {
           title: "Hotline",
-          url: "#",
+          url: "/admin/dashboard/hotline",
         },
       ],
     },

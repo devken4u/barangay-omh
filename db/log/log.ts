@@ -17,7 +17,8 @@ export async function CreateLog({
     | "PASSWORD_RESET"
     | "PASSWORD_RESET_REQUEST"
     | "CREATE"
-    | "DELETE";
+    | "DELETE"
+    | "UPDATE";
   message?: string;
 }) {
   try {

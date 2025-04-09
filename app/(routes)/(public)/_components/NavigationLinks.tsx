@@ -18,7 +18,7 @@ export default function NavigationLinks() {
       </button>
       <div
         className={cn(
-          "absolute top-full left-0 w-full bg-primary overflow-hidden transition-[max-height] px-8 rounded-b-md",
+          "absolute z-50 top-full left-0 w-full bg-primary overflow-hidden transition-[max-height] px-8 rounded-b-md",
           isNavigationLinksOpen ? "max-h-[5000px]" : "max-h-0"
         )}
       >

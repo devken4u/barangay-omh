@@ -1,7 +1,6 @@
 "use server";
 
 import { uploadImage } from "@/lib/cloudinary";
-import { revalidatePath } from "next/cache";
 
 export async function uploadImageAction(_: any, formData: FormData) {
   const file = formData.get("file") as File;

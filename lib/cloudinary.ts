@@ -26,3 +26,11 @@ export async function uploadImage(file: File) {
     return null;
   }
 }
+
+export async function deleteImage(public_id: string) {
+  const image = await cloudinary.uploader.destroy(public_id);
+  if (image.result === "ok") {
+    return true;
+  }
+  return false;
+}

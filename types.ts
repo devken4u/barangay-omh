@@ -8,3 +8,12 @@ export type FeaturedPhoto = {
   hidden: boolean;
   numerical_order: number;
 };
+
+export type Hotline = {
+  _id: string;
+  label: string;
+  number: string;
+  created_by: string;
+  createdAt: string;
+  updatedAt: string;
+};
