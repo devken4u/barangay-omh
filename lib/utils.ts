@@ -43,3 +43,14 @@ export function formateDateV1(date: string) {
     day: "numeric",
   });
 }
+
+export function formatDateV2(date: string) {
+  return new Date(date).toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}

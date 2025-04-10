@@ -17,6 +17,8 @@ import {
   redirectIfNotAuthenticated,
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
+import AnnouncementForm from "./_components/AnnouncementForm";
+import AnnouncementTable from "./_components/AnnouncementTable";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
@@ -43,8 +45,12 @@ export default async function page() {
           </div>
         </header>
         <div className="flex flex-col gap-4 p-4 pt-0 grow overflow-hidden">
-          <div>announcement</div>
-          <div className="grow overflow-auto"></div>
+          <div>
+            <AnnouncementForm />
+          </div>
+          <div className="grow overflow-auto">
+            <AnnouncementTable />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
