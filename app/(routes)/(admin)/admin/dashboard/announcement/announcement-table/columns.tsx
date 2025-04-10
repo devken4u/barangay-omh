@@ -19,23 +19,23 @@ export const columns: ColumnDef<Announcement>[] = [
     cell: ({ row }) => {
       return row.index + 1;
     },
-    meta: {
-      style: {
-        backgroundColor: "red",
-      },
-    },
   },
   {
     accessorKey: "description",
     header: "Description",
     cell: ({ row }) => {
+      // return (
+      //   <textarea
+      //     defaultValue={row.getValue("description")}
+      //     className="w-full resize-none"
+      //     readOnly
+      //     rows={3}
+      //   ></textarea>
+      // );
       return (
-        <textarea
-          defaultValue={row.getValue("description")}
-          className="w-full resize-none"
-          readOnly
-          rows={3}
-        ></textarea>
+        <p className="max-w-full text-wrap break-words">
+          {row.getValue("description")}
+        </p>
       );
     },
   },
