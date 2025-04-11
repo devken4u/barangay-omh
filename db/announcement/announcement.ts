@@ -29,3 +29,30 @@ export async function createAnnouncement({
     throw error;
   }
 }
+
+export async function deleteAnnouncement(id: string) {
+  try {
+    await connectDB();
+    const deletedAnnouncement = await AnnouncementModel.findByIdAndDelete(id);
+    return deletedAnnouncement;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function updateAnnouncement({
+  id,
+  description,
+}: {
+  id: string;
+  description: string;
+}) {
+  try {
+    const editedAnnouncement = AnnouncementModel.findByIdAndUpdate(id, {
+      description,
+    });
+    return editedAnnouncement;
+  } catch (error) {
+    throw error;
+  }
+}

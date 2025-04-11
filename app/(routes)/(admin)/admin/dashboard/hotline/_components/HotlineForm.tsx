@@ -43,7 +43,7 @@ function HotlineForm({
           });
         })
         .catch(() => {
-          toast.success("Hotline failed to save.", {
+          toast.error("Hotline failed to save.", {
             duration: 4000,
           });
         });

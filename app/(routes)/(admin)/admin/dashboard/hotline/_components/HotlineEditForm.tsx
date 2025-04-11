@@ -38,7 +38,7 @@ function HotlineEditForm({ hotline }: { hotline: HotlineFormType }) {
           });
         })
         .catch(() => {
-          toast.success("Hotline failed to update.", {
+          toast.error("Hotline failed to update.", {
             duration: 4000,
           });
         });

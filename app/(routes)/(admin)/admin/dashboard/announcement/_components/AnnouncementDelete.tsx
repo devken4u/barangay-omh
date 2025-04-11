@@ -1,5 +1,3 @@
-"use client";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,20 +10,24 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Loader, Trash2 } from "lucide-react";
-import { useActionState } from "react";
-import { deleteHotlineAction } from "@/app/actions/hotline";
-import { startTransition } from "react";
+import { Trash2, Loader } from "lucide-react";
+import { startTransition, useActionState } from "react";
+import { deleteAnnouncementAction } from "@/app/actions/announcement";
+import toast from "react-hot-toast";
 
-function HotlineDelete({ _id }: { _id: string }) {
-  const [hotlineState, hotlineAction, isPending] = useActionState(
+function AnnouncementDelete({ id }: { id: string }) {
+  const [announcementState, announcementAction, isPending] = useActionState(
     async (_: any) => {
-      return await deleteHotlineAction({ _id })
+      return await deleteAnnouncementAction(id)
         .then(() => {
-          console.log("success");
+          toast.success("Announcement successfully deleted.", {
+            duration: 4000,
+          });
         })
         .catch(() => {
-          console.log("failed");
+          toast.error("Announcement failed to delete.", {
+            duration: 4000,
+          });
         });
     },
     null
@@ -34,12 +36,9 @@ function HotlineDelete({ _id }: { _id: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          disabled={isPending}
-          className="rounded-full size-8"
-          variant="destructive"
-        >
-          <Trash2 />
+        <Button disabled={isPending} variant="destructive" className="w-full">
+          <Trash2 className="text-background" />
+          Delete
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -54,10 +53,9 @@ function HotlineDelete({ _id }: { _id: string }) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
-              variant="destructive"
               disabled={isPending}
               onClick={() => {
-                startTransition(() => hotlineAction());
+                startTransition(() => announcementAction());
               }}
             >
               {isPending && <Loader className="animate-spin" />}
@@ -70,4 +68,4 @@ function HotlineDelete({ _id }: { _id: string }) {
   );
 }
 
-export default HotlineDelete;
+export default AnnouncementDelete;
