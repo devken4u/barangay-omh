@@ -4,7 +4,7 @@ import { FeaturedPhoto } from "@/types";
 import { formateDateV1 as formatDate } from "@/lib/utils";
 import { MoveUp, MoveDown, Trash2, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import {
   increaseOrderAction,
   decreaseOrderAction,

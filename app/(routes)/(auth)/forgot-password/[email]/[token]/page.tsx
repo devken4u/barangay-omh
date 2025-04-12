@@ -1,8 +1,8 @@
 import { verifyToken } from "@/lib/utils";
-import { redirect } from "next/navigation";
 import { resetUserPasswordAction } from "@/app/actions/user";
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
 import { getPasswordResetTokenByUserEmail } from "@/db/passwordResetToken/passwordResetToken";
+import { redirectIfAuthenticated } from "@/lib/page-guard";
 
 function generateCode(): string {
   const letters = Array.from(
@@ -18,7 +18,12 @@ function generateCode(): string {
   return letters + numbers;
 }
 
-async function page({ params }: { params: { email: string; token: string } }) {
+async function page({
+  params,
+}: {
+  params: Promise<{ email: string; token: string }>;
+}) {
+  await redirectIfAuthenticated("/");
   const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   const { email, token } = await params;
@@ -71,7 +76,7 @@ async function page({ params }: { params: { email: string; token: string } }) {
         <div className="bg-white my-auto flex flex-col items-center rounded-md shadow-md gap-2 p-8">
           <Barangay174Logo size={80} />
           <h1 className="font-semibold text-2xl text-center">
-            Reset Password Link Expired
+            Reset Password Link is Expired or Invalid
           </h1>
           <a className="underline" href={`${BASE_URL}/login`}>
             Go To Login

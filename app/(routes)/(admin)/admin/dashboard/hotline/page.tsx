@@ -2,7 +2,6 @@ import { AdminSidebar } from "@/components/admin-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -23,7 +22,7 @@ import { Hotline } from "@/types";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
-  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
+  await redirectIfRoleNotAuthorized(["super-admin"], "/");
 
   const hotlines = await getHotlines();
   const data: Hotline[] = JSON.parse(JSON.stringify(hotlines));

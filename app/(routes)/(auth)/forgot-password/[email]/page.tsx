@@ -6,7 +6,11 @@ import {
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
 import { redirect } from "next/navigation";
 
-export default async function page({ params }: { params: { email: string } }) {
+export default async function page({
+  params,
+}: {
+  params: Promise<{ email: string }>;
+}) {
   const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   const { email } = await params;

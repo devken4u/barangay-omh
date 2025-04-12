@@ -1,21 +1,8 @@
-"use client";
-
+"use client";;
 import * as React from "react";
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  House,
-} from "lucide-react";
+import { BookOpen, Bot, Frame, Map, PieChart, Settings2, House } from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
-import { AdminNavProjects } from "@/components/admin-nav-projects";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,

@@ -12,13 +12,13 @@ import {
 } from "@/components/ui/dialog";
 import { Megaphone, Loader } from "lucide-react";
 import { Label } from "@/components/ui/label";
-import { useActionState, useRef } from "react";
+import { useActionState, useRef, useState } from "react";
 import { createAnnouncementAction } from "@/app/actions/announcement";
 import toast from "react-hot-toast";
 
 function AnnouncementForm() {
   const form = useRef<HTMLFormElement | null>(null);
-
+  const [isOpen, setIsOpen] = useState(false);
   const [announcementState, announcementAction, isAnnouncementActionPending] =
     useActionState(async (_: any, formData: FormData) => {
       if (form.current) form.current.reset();
@@ -38,7 +38,7 @@ function AnnouncementForm() {
     }, null);
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button disabled={isAnnouncementActionPending} variant="outline">
           {isAnnouncementActionPending && <Loader className="animate-spin" />}
@@ -68,6 +68,9 @@ function AnnouncementForm() {
         </form>
         <DialogFooter>
           <Button
+            onClick={() => {
+              setIsOpen(false);
+            }}
             disabled={isAnnouncementActionPending}
             type="submit"
             form="hotline-form"

@@ -22,7 +22,7 @@ import {
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
-  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
+  await redirectIfRoleNotAuthorized(["super-admin"], "/");
   return (
     <SidebarProvider>
       <AdminSidebar />

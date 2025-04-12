@@ -2,8 +2,10 @@ import { verifyToken } from "@/lib/utils";
 import { verifyUserEmail } from "@/db/user/user";
 import { redirect } from "next/navigation";
 import Barangay174Logo from "@/components/logo/Barangay174Logo";
+import { redirectIfAuthenticated } from "@/lib/page-guard";
 
-async function page({ params }: { params: { token: string } }) {
+async function page({ params }: { params: Promise<{ token: string }> }) {
+  await redirectIfAuthenticated("/");
   const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   const { token } = await params;

@@ -2,7 +2,6 @@ import { AdminSidebar } from "@/components/admin-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -22,7 +21,7 @@ import AnnouncementTable from "./_components/AnnouncementTable";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
-  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
+  await redirectIfRoleNotAuthorized(["super-admin"], "/");
   return (
     <SidebarProvider>
       <AdminSidebar />

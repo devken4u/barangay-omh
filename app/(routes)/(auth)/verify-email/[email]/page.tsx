@@ -6,7 +6,7 @@ import {
   isEmailVerificationPendingAction,
 } from "@/app/actions/user";
 
-async function page({ params }: { params: { email: string } }) {
+async function page({ params }: { params: Promise<{ email: string }> }) {
   const { email } = await params;
 
   const user = await getUserByEmailAction(decodeURIComponent(email));
