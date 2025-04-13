@@ -107,9 +107,12 @@ export const authConfig = {
       return session;
     },
     async jwt({ token, user }) {
-      if (user) {
-        token.is_verified = user.is_verified;
-        token.role = user.role;
+      if (user?.email) {
+        const dbUser = await getUserByEmail(user.email);
+        if (dbUser) {
+          token.is_verified = dbUser.is_verified;
+          token.role = dbUser.role;
+        }
       }
       return token;
     },

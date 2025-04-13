@@ -1,6 +1,6 @@
-"use client";;
+"use client";
 import * as React from "react";
-import { BookOpen, Bot, Frame, Map, PieChart, Settings2, House } from "lucide-react";
+import { MonitorCog, BookOpenText, House } from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/sidebar";
 import { SidebarHead } from "./SidebarHead";
 
-// This is sample data.
 const data = {
   content: [
     {
@@ -37,86 +36,32 @@ const data = {
       ],
     },
     {
-      title: "Models",
+      title: "System",
       url: "#",
-      icon: Bot,
+      icon: MonitorCog,
+      isActive: true,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "User",
+          url: "/admin/dashboard/user",
         },
         {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
+          title: "Log",
+          url: "/admin/dashboard/log",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "Content",
       url: "#",
-      icon: BookOpen,
+      icon: BookOpenText,
+      isActive: true,
       items: [
         {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "Article",
+          url: "/admin/dashboard/article",
         },
       ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
@@ -131,7 +76,6 @@ export function AdminSidebar({
       </SidebarHeader>
       <SidebarContent>
         <AdminNavMain items={data.content} />
-        {/* <AdminNavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

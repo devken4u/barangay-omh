@@ -4,7 +4,9 @@ import { connectDB } from "../connection/connection";
 export async function getAnnouncements() {
   try {
     await connectDB();
-    const announcements = await AnnouncementModel.find();
+    const announcements = await AnnouncementModel.find().sort({
+      createdAt: "desc",
+    });
     return announcements;
   } catch (error) {
     throw error;
@@ -37,6 +39,15 @@ export async function deleteAnnouncement(id: string) {
     return deletedAnnouncement;
   } catch (error) {
     return error;
+  }
+}
+
+export async function deleteAnnouncements(ids: string[]) {
+  try {
+    await connectDB();
+    await AnnouncementModel.deleteMany({ _id: { $in: ids } });
+  } catch (error) {
+    throw error;
   }
 }
 

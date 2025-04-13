@@ -1,3 +1,4 @@
+import PublicFooter from "./_components/PublicFooter";
 import PublicHeader from "./_components/PublicHeader";
 
 async function layout({
@@ -9,6 +10,7 @@ async function layout({
     <div>
       <PublicHeader />
       <main>{children}</main>
+      <PublicFooter />
     </div>
   );
 }

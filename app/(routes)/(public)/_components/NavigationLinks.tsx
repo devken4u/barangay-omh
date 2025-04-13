@@ -1,10 +1,27 @@
-"use client";;
+"use client";
 import { cn } from "@/lib/utils";
 import { SquareMenu } from "lucide-react";
 import { useState } from "react";
+import { NavigationGroupLink } from "../_types/types";
+import { v4 as uuidv4 } from "uuid";
+import { Home, NotebookText } from "lucide-react";
+import NavigationGroupLinkComponent from "./NavigationGroupLinkComponent";
 
 export default function NavigationLinks() {
   const [isNavigationLinksOpen, setIsNavigationLinksOpen] = useState(false);
+
+  const navigationGroupLinks: NavigationGroupLink = {
+    groupName: "Links",
+    links: [
+      { name: "Home", url: "/", key: uuidv4(), icon: Home },
+      { name: "About", url: "/about", key: uuidv4(), icon: NotebookText },
+    ],
+  };
+
+  const navigationGroupServices: NavigationGroupLink = {
+    groupName: "Services",
+    links: [{ name: "Job Board", url: "/", key: uuidv4(), icon: Home }],
+  };
 
   return (
     <div>
@@ -16,31 +33,16 @@ export default function NavigationLinks() {
       </button>
       <div
         className={cn(
-          "absolute z-50 top-full left-0 w-full bg-primary overflow-hidden transition-[max-height] px-8 rounded-b-md",
+          "absolute z-50 top-full left-0 w-full bg-primary overflow-hidden transition-[max-height] px-8 rounded-b-md text-background",
           isNavigationLinksOpen ? "max-h-[5000px]" : "max-h-0"
         )}
       >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum nisi,
-        reprehenderit cumque magnam repellat harum fugit quisquam ipsa maiores
-        natus error, molestiae ut perspiciatis explicabo officia eius corrupti
-        sequi blanditiis magni saepe expedita rem mollitia, sint facere? Minus
-        tempore dolore veritatis, necessitatibus officiis ipsa vel quos aperiam
-        sit eius excepturi nemo eum officia deleniti tenetur vitae mollitia ad
-        quidem quaerat accusantium amet rerum ea veniam accusamus. Quibusdam,
-        acclaceat, voluptatum laboriosam! Hic maiores reiciendis et, eligendi
-        distinctio necessitatibus sapiente sequi debitis. Odio sapiente maiores
-        autem nesciunt earum quis, iure reiciendis voluptatum sint possimus quo
-        aliquid modi, magnam temporibus ducimus facere velit explicabo maxime
-        architecto ratione hic eius voluptate. Repudiandae accusantium odio
-        explicabo deserunt commodi cumque ipsam quasi! Tenetur reprehenderit
-        nulla sint ex illo eveniet optio voluptate odio magnam nobis blanditiis
-        ad, quasi, earum, libero ipsum. Sint ipsum impedit quas dicta
-        aspernatur. Quibusdam ab laboriosam suscipit inventore quaerat provident
-        ratione mollitia nesciunt sint. Vel fugit aperiam beatae, reiciendis rem
-        omnis assumenda dicta nihil ratione suscipit, error corrupti. Dolores
-        quibusdam nisi nesciunt magni eum quaerat dolore laboriosam illo impedit
-        debitis, commodi nostrum excepturi voluptas consequatur velit soluta
-        ullam sequi doloribus et quisquam, asperiores omnis earum porro. Iste
+        <NavigationGroupLinkComponent
+          navigationGroupLink={navigationGroupLinks}
+        />
+        <NavigationGroupLinkComponent
+          navigationGroupLink={navigationGroupServices}
+        />
       </div>
     </div>
   );

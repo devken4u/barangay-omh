@@ -3,11 +3,13 @@
 import {
   createAnnouncement,
   deleteAnnouncement,
+  deleteAnnouncements,
   updateAnnouncement,
 } from "@/db/announcement/announcement";
 import { auth } from "@/auth";
 import { CreateLog } from "@/db/log/log";
 import { revalidatePath } from "next/cache";
+import { Announcement } from "../(routes)/(admin)/admin/dashboard/announcement/announcement-table/columns";
 
 export async function createAnnouncementAction({
   description,
@@ -39,6 +41,27 @@ export async function deleteAnnouncementAction(id: string) {
     await CreateLog({
       action: "DELETE",
       message: "Deleted an announcement.",
+      email: session?.user.email!,
+    });
+    revalidatePath("/admin/dashboard/announcement");
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+export async function deleteAnnouncementsAction(announcements: Announcement[]) {
+  try {
+    const session = await auth();
+
+    const ids = announcements.map((announcement) => {
+      return announcement._id;
+    });
+
+    await deleteAnnouncements(ids);
+    await CreateLog({
+      action: "DELETE",
+      message: "Deleted announcements.",
       email: session?.user.email!,
     });
     revalidatePath("/admin/dashboard/announcement");
