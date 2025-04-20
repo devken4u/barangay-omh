@@ -12,16 +12,28 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import FeaturedPhotoList from "./_components/FeaturedPhotoList";
-import FeaturedPhotoForm from "./_components/FeaturedPhotoForm";
 import {
   redirectIfNotAuthenticated,
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
 
-export default async function page() {
+import { isArticleValid } from "@/db/article/article";
+import { redirect } from "next/navigation";
+import ArticleList from "../_components/ArticleList";
+
+export default async function page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   await redirectIfNotAuthenticated("/");
-  await redirectIfRoleNotAuthorized(["super-admin"], "/");
+  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
+
+  const { id } = await params;
+
+  if (!(await isArticleValid(id))) {
+    return redirect("/");
+  }
   return (
     <SidebarProvider>
       <AdminSidebar />
@@ -37,19 +49,14 @@ export default async function page() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Featured Photo</BreadcrumbPage>
+                  <BreadcrumbPage>Article</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-col gap-4 p-4 pt-0 grow overflow-hidden">
-          <div>
-            <FeaturedPhotoForm />
-          </div>
-          <div className="grow overflow-auto">
-            <FeaturedPhotoList />
-          </div>
+        <div className="flex gap-4 grow overflow-hidden">
+          <ArticleList selected={id as string} />
         </div>
       </SidebarInset>
     </SidebarProvider>

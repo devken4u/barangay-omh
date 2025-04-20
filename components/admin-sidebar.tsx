@@ -36,6 +36,18 @@ const data = {
       ],
     },
     {
+      title: "Content",
+      url: "#",
+      icon: BookOpenText,
+      isActive: true,
+      items: [
+        {
+          title: "Article",
+          url: "/admin/dashboard/article",
+        },
+      ],
+    },
+    {
       title: "System",
       url: "#",
       icon: MonitorCog,
@@ -48,18 +60,6 @@ const data = {
         {
           title: "Log",
           url: "/admin/dashboard/log",
-        },
-      ],
-    },
-    {
-      title: "Content",
-      url: "#",
-      icon: BookOpenText,
-      isActive: true,
-      items: [
-        {
-          title: "Article",
-          url: "/admin/dashboard/article",
         },
       ],
     },
