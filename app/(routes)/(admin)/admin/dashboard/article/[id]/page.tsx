@@ -17,9 +17,11 @@ import {
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
 
-import { isArticleValid } from "@/db/article/article";
+import { getArticleById, isArticleValid } from "@/db/article/article";
 import { redirect } from "next/navigation";
 import ArticleList from "../_components/ArticleList";
+import ArticleEditor from "../_components/ArticleEditor";
+import { auth } from "@/auth";
 
 export default async function page({
   params,
@@ -34,6 +36,12 @@ export default async function page({
   if (!(await isArticleValid(id))) {
     return redirect("/");
   }
+
+  const session = await auth();
+  const article = JSON.parse(
+    JSON.stringify(await getArticleById(session?.user.email!, id))
+  );
+
   return (
     <SidebarProvider>
       <AdminSidebar />
@@ -55,8 +63,9 @@ export default async function page({
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex gap-4 grow overflow-hidden">
+        <div className="flex grow overflow-hidden">
           <ArticleList selected={id as string} />
+          <ArticleEditor article={article!} />
         </div>
       </SidebarInset>
     </SidebarProvider>

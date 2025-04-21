@@ -23,7 +23,7 @@ async function page() {
       action: "CREATE",
       message: "Created a new article.",
     });
-    return redirect(`/admin/dashboard/article/${article._id}`);
+    if (article) return redirect(`/admin/dashboard/article/${article._id}`);
   } else {
     const article = await getRecentUnpublishedArticle(session?.user.email!);
     return redirect(`/admin/dashboard/article/${article._id}`);

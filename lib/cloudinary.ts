@@ -18,7 +18,6 @@ export async function uploadImage(file: File) {
   try {
     // upload image here
     const image = await cloudinary.uploader.upload(dataUri, {
-      folder: "featured_photos",
       unique_filename: false,
     });
     return image;

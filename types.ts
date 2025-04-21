@@ -25,9 +25,10 @@ export type Article = {
   author: string;
   body: string;
   image_url: string;
+  public_id: string;
   is_published: string;
   published_date: string;
   created_by: string;
-  created_at: string;
-  updated_at: string;  
+  createdAt: string;
+  updatedAt: string;
 };

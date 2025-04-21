@@ -9,6 +9,7 @@ const ArticleSchema = new Schema(
     },
     sub_title: {
       type: String,
+      default: "",
     },
     author: {
       type: String,
@@ -17,6 +18,9 @@ const ArticleSchema = new Schema(
       type: String,
     },
     image_url: {
+      type: String,
+    },
+    public_id: {
       type: String,
     },
     is_published: {
