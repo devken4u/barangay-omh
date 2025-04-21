@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { MonitorCog, BookOpenText, House } from "lucide-react";
+import { MonitorCog, BookOpenText, House, LucideIcon } from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -24,14 +24,22 @@ const data = {
         {
           title: "Featured Photo",
           url: "/admin/dashboard/featured-photo",
+          allowedRole: ["super-admin"],
         },
         {
           title: "Announcement",
           url: "/admin/dashboard/announcement",
+          allowedRole: ["super-admin"],
         },
         {
           title: "Hotline",
           url: "/admin/dashboard/hotline",
+          allowedRole: ["super-admin"],
+        },
+        {
+          title: "Garbage Schedules",
+          url: "/admin/dashboard/garbage-schedules",
+          allowedRole: ["super-admin"],
         },
       ],
     },
@@ -44,6 +52,17 @@ const data = {
         {
           title: "Article",
           url: "/admin/dashboard/article",
+          allowedRole: ["admin", "super-admin"],
+        },
+        {
+          title: "Article Tags",
+          url: "/admin/dashboard/article-tags",
+          allowedRole: ["super-admin"],
+        },
+        {
+          title: "Article List",
+          url: "/admin/dashboard/articles",
+          allowedRole: ["admin", "super-admin"],
         },
       ],
     },
@@ -56,10 +75,12 @@ const data = {
         {
           title: "User",
           url: "/admin/dashboard/user",
+          allowedRole: ["super-admin"],
         },
         {
           title: "Log",
           url: "/admin/dashboard/log",
+          allowedRole: ["super-admin"],
         },
       ],
     },
@@ -75,7 +96,21 @@ export function AdminSidebar({
         <SidebarHead />
       </SidebarHeader>
       <SidebarContent>
-        <AdminNavMain items={data.content} />
+        <AdminNavMain
+          items={
+            data.content as {
+              title: string;
+              url: string;
+              icon?: LucideIcon;
+              isActive?: boolean;
+              items?: {
+                title: string;
+                url: string;
+                allowedRole: ("user" | "super-admin" | "admin")[];
+              }[];
+            }[]
+          }
+        />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

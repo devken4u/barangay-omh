@@ -32,3 +32,10 @@ export type Article = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Announcement = {
+  _id: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}

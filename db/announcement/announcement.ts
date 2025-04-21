@@ -1,12 +1,12 @@
 import AnnouncementModel from "../models/announcement";
 import { connectDB } from "../connection/connection";
 
-export async function getAnnouncements() {
+export async function getAnnouncements(params?: {limit?: number}) {
   try {
     await connectDB();
     const announcements = await AnnouncementModel.find().sort({
       createdAt: "desc",
-    });
+    }).limit(params?.limit ? params.limit : 0);
     return announcements;
   } catch (error) {
     throw error;

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 import {
   Collapsible,
@@ -29,9 +30,13 @@ export function AdminNavMain({
     items?: {
       title: string;
       url: string;
+      allowedRole: ("user" | "super-admin" | "admin")[];
     }[];
   }[];
 }) {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return;
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
@@ -53,15 +58,19 @@ export function AdminNavMain({
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
+                  {item.items?.map((subItem) => {
+                    if (subItem.allowedRole.includes(session?.user.role!)) {
+                      return (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton asChild>
+                            <a href={subItem.url}>
+                              <span>{subItem.title}</span>
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      );
+                    }
+                  })}
                 </SidebarMenuSub>
               </CollapsibleContent>
             </SidebarMenuItem>

@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { SquareMenu } from "lucide-react";
+import { Megaphone, SquareMenu } from "lucide-react";
 import { useState } from "react";
 import { NavigationGroupLink } from "../_types/types";
 import { v4 as uuidv4 } from "uuid";
@@ -15,6 +15,12 @@ export default function NavigationLinks() {
     links: [
       { name: "Home", url: "/", key: uuidv4(), icon: Home },
       { name: "About", url: "/about", key: uuidv4(), icon: NotebookText },
+      {
+        name: "Announcements",
+        url: "/announcements",
+        key: uuidv4(),
+        icon: Megaphone,
+      },
     ],
   };
 

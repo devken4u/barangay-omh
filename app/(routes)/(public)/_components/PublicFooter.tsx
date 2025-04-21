@@ -9,6 +9,7 @@ function PublicFooter() {
     links: [
       { name: "Home", url: "/", key: uuidv4() },
       { name: "About", url: "/about", key: uuidv4() },
+      { name: "Announcements", url: "/announcements", key: uuidv4() },
     ],
   };
 
