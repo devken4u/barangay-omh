@@ -42,6 +42,16 @@ export async function getUnpublishedUserArticlesAction(filter: string) {
     throw error;
   }
 }
+export async function getAllPublishedArticlesAction({
+  titleFilter
+}: {titleFilter: string}){
+  try {
+
+  } catch (error) {
+    throw error;
+  }
+
+}
 export async function createArticleAction() {
   try {
     const session = await auth();

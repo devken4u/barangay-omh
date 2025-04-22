@@ -71,7 +71,7 @@ function ArticleList({ selected }: { selected: string }) {
   return (
     <>
       {isOpen ? (
-        <div className="border-r w-72 py-2 px-4 flex flex-col">
+        <div className="border-r min-w-72 w-72 py-2 px-4 flex flex-col absolute bg-background z-50 top-0 left-0 h-full lg:static">
           <div className="flex items-center gap-2">
             <Input
               value={searchString}
@@ -120,7 +120,7 @@ function ArticleList({ selected }: { selected: string }) {
                     </h1>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="max-h-80 overflow-y-auto space-y-1">
+                    <div className="max-h-80 overflow-y-auto space-y-1 overflow-x-hidden">
                       {isUnPublishedStatePending && !unPublishedState && (
                         <div className="space-y-1">
                           <Skeleton className="w-full h-6" />
@@ -158,7 +158,7 @@ function ArticleList({ selected }: { selected: string }) {
                     </h1>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="max-h-80 overflow-y-auto space-y-1">
+                    <div className="max-h-80 overflow-y-auto space-y-1 overflow-x-hidden">
                       {isPublishedStatePending && !publishedState && (
                         <div className="space-y-1">
                           <Skeleton className="w-full h-6" />
@@ -185,7 +185,7 @@ function ArticleList({ selected }: { selected: string }) {
           </div>
         </div>
       ) : (
-        <div className="py-2 px-4">
+        <div className="py-2">
           <Button variant="ghost" size="icon" onClick={() => setIsOpen(true)}>
             <PanelLeft className="size-5" />
           </Button>

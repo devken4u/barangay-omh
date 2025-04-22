@@ -22,7 +22,7 @@ export async function createArticle({
 export async function isUnpublishedArticleEmpty(email: string) {
   try {
     await connectDB();
-    const articles = await ArticleModel.find({ email, is_published: false });
+    const articles = await ArticleModel.find({ created_by: email, is_published: false });
     if (articles.length) return false;
     return true;
   } catch (error) {
@@ -33,7 +33,7 @@ export async function getRecentUnpublishedArticle(email: string) {
   try {
     await connectDB();
     const article = await ArticleModel.findOne({
-      email,
+      created_by: email,
       is_published: false,
     }).sort({ createdAt: "desc" });
     return article;
@@ -47,7 +47,7 @@ export async function getArticleById(
 ): Promise<Article | null> {
   try {
     await connectDB();
-    const article = await ArticleModel.findById({ email, _id: id });
+    const article = await ArticleModel.findById({ created_by: email, _id: id });
     return article;
   } catch (error) {
     throw error;

@@ -63,7 +63,7 @@ export default async function page({
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex grow overflow-hidden">
+        <div className="flex grow overflow-hidden relative">
           <ArticleList selected={id as string} />
           <ArticleEditor article={article!} />
         </div>
