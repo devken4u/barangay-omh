@@ -55,11 +55,6 @@ const data = {
           allowedRole: ["admin", "super-admin"],
         },
         {
-          title: "Article Tags",
-          url: "/admin/dashboard/article-tags",
-          allowedRole: ["super-admin"],
-        },
-        {
           title: "Article List",
           url: "/admin/dashboard/articles",
           allowedRole: ["admin", "super-admin"],

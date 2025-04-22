@@ -6,7 +6,7 @@ function HomepageHero() {
   return (
     <div className="shadow-md">
       <div className="relative w-full h-[40rem]">
-        <div className="absolute top-0 left-0 size-full bg-black/40 z-10">
+        <div className="absolute top-0 left-0 size-full bg-black/40 z-10 px-2">
           <h1 className="text-center text-background font-bold text-5xl py-20">
             Serving the Community with Excellence and Care
           </h1>

@@ -19,7 +19,6 @@ export async function createArticle({
     throw error;
   }
 }
-
 export async function isUnpublishedArticleEmpty(email: string) {
   try {
     await connectDB();
@@ -30,7 +29,6 @@ export async function isUnpublishedArticleEmpty(email: string) {
     throw error;
   }
 }
-
 export async function getRecentUnpublishedArticle(email: string) {
   try {
     await connectDB();
@@ -43,7 +41,6 @@ export async function getRecentUnpublishedArticle(email: string) {
     throw error;
   }
 }
-
 export async function getArticleById(
   email: string,
   id: string
@@ -56,7 +53,6 @@ export async function getArticleById(
     throw error;
   }
 }
-
 export async function isArticleValid(id: string) {
   try {
     await connectDB();
@@ -68,7 +64,6 @@ export async function isArticleValid(id: string) {
     throw error;
   }
 }
-
 export async function getUnpublishedUserArticles(
   email: string,
   filter: string
@@ -85,7 +80,6 @@ export async function getUnpublishedUserArticles(
     throw error;
   }
 }
-
 export async function getPublishedUserArticles(
   email: string,
   filter: string
@@ -97,6 +91,17 @@ export async function getPublishedUserArticles(
       is_published: true,
       title: { $regex: filter, $options: "i" },
     }).sort({ createdAt: "desc" });
+    return articles;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function getAllPublishedArticles() {
+  try {
+    await connectDB();
+    const articles = await ArticleModel.find({ is_published: true }).sort({
+      published_date: "desc",
+    });
     return articles;
   } catch (error) {
     throw error;
@@ -119,7 +124,6 @@ export async function updateTitle(
     throw error;
   }
 }
-
 export async function updateSubTitle(
   sub_title: string,
   id: string
@@ -134,7 +138,6 @@ export async function updateSubTitle(
     throw error;
   }
 }
-
 export async function updateBody(
   body: string,
   id: string
@@ -172,7 +175,6 @@ export async function unPublishArticle(id: string): Promise<Article | null> {
     throw error;
   }
 }
-
 export async function updateArticleImage(
   image_url: string,
   public_id: string,
@@ -189,7 +191,6 @@ export async function updateArticleImage(
     throw error;
   }
 }
-
 export async function removeArticleImage(id: string): Promise<Article | null> {
   try {
     await connectDB();

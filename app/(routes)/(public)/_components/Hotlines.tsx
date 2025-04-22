@@ -9,7 +9,7 @@ function Hotlines() {
         target="_blank"
         className="p-2 hover:bg-destructive hover:text-background block text-center font-bold"
       >
-        See All Hotlines...
+        View in new tab
       </a>
     </div>
   );

@@ -43,7 +43,7 @@ export default async function page() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-col gap-4 p-4 pt-0 grow overflow-hidden">
+        <div className="flex flex-col p-4 pt-0 grow overflow-hidden">
           <div>
             <AnnouncementForm />
           </div>

@@ -22,7 +22,6 @@ export type Article = {
   _id: string;
   title: string;
   sub_title: string;
-  author: string;
   body: string;
   image_url: string;
   public_id: string;
@@ -38,4 +37,4 @@ export type Announcement = {
   description: string;
   createdAt: string;
   updatedAt: string;
-}
+};
