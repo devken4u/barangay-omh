@@ -11,10 +11,6 @@ const ArticleSchema = new Schema(
       type: String,
       default: "",
     },
-    tags: {
-      type: [String],
-      default: [],
-    },
     body: {
       type: String,
     },

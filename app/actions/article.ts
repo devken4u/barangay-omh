@@ -13,6 +13,7 @@ import {
   removeArticleImage,
   getArticleById,
   getAllPublishedArticles,
+  deleteArticle,
 } from "@/db/article/article";
 import { auth } from "@/auth";
 import { CreateLog } from "@/db/log/log";
@@ -58,7 +59,11 @@ export async function getAllPublishedArticlesAction({
       limit,
       skip,
     });
-    return articles;
+    return {
+      data: articles.data,
+      pages: Math.ceil(articles.total / limit),
+      total: articles.total,
+    };
   } catch (error) {
     throw error;
   }
@@ -184,6 +189,27 @@ export async function removeArticleImageAction(public_id: string, id: string) {
     revalidatePath(`/admin/dashboard/article/${id}`);
     if (article) return true;
     return false;
+  } catch (error) {
+    return false;
+  }
+}
+export async function deleteArticleAction(id: string) {
+  try {
+    const session = await auth();
+    const article = await getArticleById(session?.user.email!, id);
+    if (article?.public_id) {
+      const result = await deleteImage(article?.public_id);
+      if (!result) {
+        throw new Error("Image deletion in cloudinary failed.");
+      }
+    }
+    await deleteArticle(id);
+    await CreateLog({
+      email: session?.user.email!,
+      action: "DELETE",
+      message: "Deleted an article.",
+    });
+    return true;
   } catch (error) {
     return false;
   }

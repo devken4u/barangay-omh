@@ -59,6 +59,11 @@ const data = {
           url: "/admin/dashboard/articles",
           allowedRole: ["admin", "super-admin"],
         },
+        {
+          title: "Barangay Officials",
+          url: "/admin/dashboard/barangay-officials",
+          allowedRole: ["super-admin"],
+        },
       ],
     },
     {

@@ -119,7 +119,11 @@ export async function getAllPublishedArticles({
       })
       .limit(limit)
       .skip(skip);
-    return JSON.parse(JSON.stringify(articles));
+    const total = await ArticleModel.find({ is_published: true });
+    return {
+      data: JSON.parse(JSON.stringify(articles)),
+      total: total.length,
+    };
   } catch (error) {
     throw error;
   }
@@ -215,6 +219,15 @@ export async function removeArticleImage(id: string): Promise<Article | null> {
       image_url: "",
       public_id: "",
     });
+    return article;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function deleteArticle(id: string) {
+  try {
+    await connectDB();
+    const article = await ArticleModel.findByIdAndDelete(id);
     return article;
   } catch (error) {
     throw error;

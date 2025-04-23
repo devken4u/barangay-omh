@@ -17,6 +17,7 @@ import {
 import { startTransition } from "react";
 import { formatDateV2 } from "@/lib/utils";
 import ArticleImageUpload from "./ArticleImageUpload";
+import ArticleDelete from "./ArticleDelete";
 
 function ArticleEditor({ article }: { article: Article }) {
   const titleRef = useRef<HTMLTextAreaElement | null>(null);
@@ -254,6 +255,7 @@ function ArticleEditor({ article }: { article: Article }) {
           <strong>Last updated:</strong> {formatDateV2(article.updatedAt)}
         </p>
       </div>
+      <ArticleDelete id={article._id} />
     </div>
   );
 }
