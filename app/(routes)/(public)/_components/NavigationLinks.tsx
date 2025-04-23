@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Megaphone, SquareMenu } from "lucide-react";
+import { Megaphone, Phone, SquareMenu } from "lucide-react";
 import { useState } from "react";
 import { NavigationGroupLink } from "../_types/types";
 import { v4 as uuidv4 } from "uuid";
@@ -20,6 +20,12 @@ export default function NavigationLinks() {
         url: "/announcements",
         key: uuidv4(),
         icon: Megaphone,
+      },
+      {
+        name: "Hotlines",
+        url: "/hotlines",
+        key: uuidv4(),
+        icon: Phone,
       },
     ],
   };

@@ -4,7 +4,7 @@ import { Announcement } from "@/types";
 
 async function Announcements() {
   const announcements = JSON.parse(
-    JSON.stringify(await getAnnouncements({ limit: 10 }))
+    JSON.stringify(await getAnnouncements({ limit: 5 }))
   );
 
   return (
@@ -12,6 +12,9 @@ async function Announcements() {
       <h1 className="text-3xl font-bold text-center bg-primary text-background py-2">
         Announcements
       </h1>
+      {announcements && announcements.length < 1 && (
+        <p className="text-center py-4 font-semibold">-NO ANNOUNCEMENTS-</p>
+      )}
       <div className="p-4 space-y-4">
         {announcements.map((announcement: Announcement) => {
           return (

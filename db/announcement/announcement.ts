@@ -5,7 +5,7 @@ export async function getAnnouncements(params?: {limit?: number}) {
   try {
     await connectDB();
     const announcements = await AnnouncementModel.find().sort({
-      createdAt: "desc",
+      createdAt: "desc"
     }).limit(params?.limit ? params.limit : 0);
     return announcements;
   } catch (error) {
