@@ -12,6 +12,7 @@ import {
   updateArticleImage,
   removeArticleImage,
   getArticleById,
+  getAllPublishedArticles,
 } from "@/db/article/article";
 import { auth } from "@/auth";
 import { CreateLog } from "@/db/log/log";
@@ -43,14 +44,24 @@ export async function getUnpublishedUserArticlesAction(filter: string) {
   }
 }
 export async function getAllPublishedArticlesAction({
-  titleFilter
-}: {titleFilter: string}){
+  titleFilter = "",
+  limit = 20,
+  skip = 0,
+}: {
+  titleFilter?: string;
+  limit?: number;
+  skip?: number;
+}) {
   try {
-
+    const articles = await getAllPublishedArticles({
+      titleFilter,
+      limit,
+      skip,
+    });
+    return articles;
   } catch (error) {
     throw error;
   }
-
 }
 export async function createArticleAction() {
   try {

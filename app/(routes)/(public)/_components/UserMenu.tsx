@@ -16,7 +16,9 @@ async function UserMenu() {
   const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   const dashboardLink =
-    session?.user.role === "user" ? "/user/dashboard" : "/admin/dashboard";
+    session?.user.role === "user"
+      ? "/user/dashboard"
+      : "/admin/dashboard/article";
 
   return (
     <DropdownMenu>

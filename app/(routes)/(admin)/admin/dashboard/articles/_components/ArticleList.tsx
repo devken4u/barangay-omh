@@ -1,17 +1,27 @@
+"use client";
+
 import { getAllPublishedArticles } from "@/db/article/article";
 import { Article } from "@/types";
 import ArticleCard from "./ArticleCard";
+import { useActionState, useEffect } from "react";
+import { getAllPublishedArticlesAction } from "@/app/actions/article";
+import { useState } from "react";
 
-async function ArticleList() {
-  const articles = await getAllPublishedArticles();
-  const data: Article[] = JSON.parse(JSON.stringify(articles));
+function ArticleList() {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {}, []);
 
   return (
-    <div className="grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4">
-      {data.map((article: Article) => {
-        return <ArticleCard key={article._id} article={article} />;
-      })}
-    </div>
+    <>
+      {data && (
+        <div className="grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4">
+          {data.map((article: Article) => {
+            return <ArticleCard key={article._id} article={article} />;
+          })}
+        </div>
+      )}
+    </>
   );
 }
 

@@ -22,7 +22,10 @@ export async function createArticle({
 export async function isUnpublishedArticleEmpty(email: string) {
   try {
     await connectDB();
-    const articles = await ArticleModel.find({ created_by: email, is_published: false });
+    const articles = await ArticleModel.find({
+      created_by: email,
+      is_published: false,
+    });
     if (articles.length) return false;
     return true;
   } catch (error) {
@@ -96,12 +99,26 @@ export async function getPublishedUserArticles(
     throw error;
   }
 }
-export async function getAllPublishedArticles() {
+export async function getAllPublishedArticles({
+  titleFilter,
+  limit,
+  skip,
+}: {
+  titleFilter: string;
+  limit: number;
+  skip: number;
+}) {
   try {
     await connectDB();
-    const articles = await ArticleModel.find({ is_published: true }).sort({
-      published_date: "desc",
-    });
+    const articles = await ArticleModel.find({
+      is_published: true,
+      title: { $regex: titleFilter, $options: "i" },
+    })
+      .sort({
+        published_date: "desc",
+      })
+      .limit(limit)
+      .skip(skip);
     return articles;
   } catch (error) {
     throw error;
