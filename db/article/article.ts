@@ -119,7 +119,7 @@ export async function getAllPublishedArticles({
       })
       .limit(limit)
       .skip(skip);
-    return articles;
+    return JSON.parse(JSON.stringify(articles));
   } catch (error) {
     throw error;
   }

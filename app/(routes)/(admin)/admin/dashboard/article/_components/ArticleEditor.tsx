@@ -122,7 +122,7 @@ function ArticleEditor({ article }: { article: Article }) {
   }, [body]);
 
   return (
-    <div className="space-y-6 px-2 w-6xl mx-auto max-w-full">
+    <div className="space-y-6 px-2 w-6xl mx-auto max-w-full overflow-y-auto pb-4">
       <div className="flex gap-2 items-center justify-end">
         <ArticleEditorSaveState
           isLoading={

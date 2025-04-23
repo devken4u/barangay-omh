@@ -1,22 +1,30 @@
 "use client";
 
-import { getAllPublishedArticles } from "@/db/article/article";
 import { Article } from "@/types";
 import ArticleCard from "./ArticleCard";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, startTransition } from "react";
 import { getAllPublishedArticlesAction } from "@/app/actions/article";
-import { useState } from "react";
 
 function ArticleList() {
-  const [data, setData] = useState<any[]>([]);
+  const [articles, getArticleAction, isPending] = useActionState(async () => {
+    return await getAllPublishedArticlesAction({
+      limit: 0,
+      skip: 0,
+      titleFilter: "",
+    });
+  }, null);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    startTransition(() => {
+      getArticleAction();
+    });
+  }, []);
 
   return (
     <>
-      {data && (
+      {articles && articles.length && (
         <div className="grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4">
-          {data.map((article: Article) => {
+          {(articles as Article[]).map((article) => {
             return <ArticleCard key={article._id} article={article} />;
           })}
         </div>
