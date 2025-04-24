@@ -22,7 +22,7 @@ function HomePage() {
       </div>
       <Articles />
     </div>
-  );
+  );  
 }
 
 export default HomePage;

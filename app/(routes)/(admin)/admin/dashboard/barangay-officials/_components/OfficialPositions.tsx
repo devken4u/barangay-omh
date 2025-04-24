@@ -11,7 +11,7 @@ async function OfficialPositions() {
   return (
     <div>
       <BarangayOfficialPositionCreate />
-      <div className="container py-4">
+      <div className="py-4">
         <DataTable columns={columns} data={data} />
       </div>
     </div>

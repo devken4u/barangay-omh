@@ -2,21 +2,30 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { OfficialPosition } from "@/types";
+import ChangePositionOrder from "../_components/ChangePositionOrder";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
 export const columns: ColumnDef<OfficialPosition>[] = [
   {
-    accessorKey: "_id",
-    header: "Status",
+    header: "#",
+    cell: ({ row }) => {
+      return row.index + 1;
+    },
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "title",
+    header: "Position Title",
   },
   {
-    accessorKey: "amount",
-    header: "Amount",
+    id: "actions",
+    cell: ({ row }) => {
+      return (
+        <ChangePositionOrder
+          officialPosition={row.original as OfficialPosition}
+        />
+      );
+    },
   },
 ];
