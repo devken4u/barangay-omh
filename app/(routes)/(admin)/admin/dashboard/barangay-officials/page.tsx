@@ -16,6 +16,8 @@ import {
   redirectIfNotAuthenticated,
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
+import OfficialPositions from "./_components/OfficialPositions";
+import BarangayOfficials from "./_components/BarangayOfficials";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
@@ -36,13 +38,16 @@ export default async function page() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Article List</BreadcrumbPage>
+                  <BreadcrumbPage>Barangay Official</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex grow overflow-hidden"></div>
+        <div className="px-4">
+          <OfficialPositions />
+          <BarangayOfficials />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

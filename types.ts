@@ -38,3 +38,11 @@ export type Announcement = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type OfficialPosition = {
+  _id: string;
+  title: string;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+};
