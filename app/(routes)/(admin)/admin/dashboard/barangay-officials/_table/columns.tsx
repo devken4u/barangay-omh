@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { OfficialPosition } from "@/types";
 import ChangePositionOrder from "../_components/ChangePositionOrder";
+import OfficialPositionActions from "../_components/OfficialPositionActions";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -27,5 +28,11 @@ export const columns: ColumnDef<OfficialPosition>[] = [
         />
       );
     },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => (
+      <OfficialPositionActions row={row.original as OfficialPosition} />
+    ),
   },
 ];

@@ -46,3 +46,14 @@ export type OfficialPosition = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Official = {
+  _id: string;
+  titles: string;
+  name: string;
+  position: string;
+  image_url: string;
+  public_id: string;
+  createdAt: string;
+  updatedAt: string;
+};

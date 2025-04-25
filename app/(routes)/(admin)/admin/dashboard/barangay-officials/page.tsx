@@ -44,7 +44,7 @@ export default async function page() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="px-4">
+        <div className="px-4 space-y-8 overflow-y-auto">
           <OfficialPositions />
           <BarangayOfficials />
         </div>

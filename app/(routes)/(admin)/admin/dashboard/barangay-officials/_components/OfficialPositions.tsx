@@ -1,4 +1,4 @@
-import BarangayOfficialPositionCreate from "./BarangayOfficialCreate";
+import BarangayOfficialPositionCreate from "./OfficialPositionCreate";
 import { columns } from "../_table/columns";
 import { DataTable } from "../_table/data-table";
 import { getOfficialPositions } from "@/db/barangayOfficialPosition/barangayOfficialPosition";

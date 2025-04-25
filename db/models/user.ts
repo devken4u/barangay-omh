@@ -25,10 +25,6 @@ const userSchema = new Schema(
       enum: ["admin", "super-admin", "user"],
       default: "user",
     },
-    permissions: {
-      type: String,
-      enum: ["*"],
-    },
     firstname: {
       type: String,
       default: "",

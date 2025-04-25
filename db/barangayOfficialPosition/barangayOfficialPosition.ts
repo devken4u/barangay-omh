@@ -63,11 +63,23 @@ export async function getFirstPosition() {
   }
 }
 
+export async function deleteBarangayOfficialPosition(id: string) {
+  try {
+    await connectDB();
+    const deletePosition =
+      await BarangayOfficialPositionModel.findByIdAndDelete(id);
+    return deletePosition;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function movePositionOrderUp(id: string) {
   try {
     await connectDB();
     const first = await getFirstPosition();
-    if (String(first._id) === id){
+    if (String(first._id) === id) {
       return false;
     }
 
@@ -79,13 +91,13 @@ export async function movePositionOrderUp(id: string) {
 
     const positionToSwap = positions[index - 1];
     const positionForSwap = await BarangayOfficialPositionModel.findById(id);
-    
+
     await BarangayOfficialPositionModel.findByIdAndUpdate(positionToSwap._id, {
-      order: positionForSwap.order
+      order: positionForSwap.order,
     });
 
     await BarangayOfficialPositionModel.findByIdAndUpdate(positionForSwap._id, {
-      order: positionToSwap.order
+      order: positionToSwap.order,
     });
     return true;
   } catch (error) {
@@ -98,7 +110,7 @@ export async function movePositionOrderDown(id: string) {
     await connectDB();
     const last = await getLastPosition();
     if (String(last._id) === id) return false;
-    
+
     const positions = await getOfficialPositions();
 
     const index = positions.findIndex((position) => {
@@ -107,13 +119,13 @@ export async function movePositionOrderDown(id: string) {
 
     const positionToSwap = positions[index + 1];
     const positionForSwap = await BarangayOfficialPositionModel.findById(id);
-    
+
     await BarangayOfficialPositionModel.findByIdAndUpdate(positionToSwap._id, {
-      order: positionForSwap.order
+      order: positionForSwap.order,
     });
 
     await BarangayOfficialPositionModel.findByIdAndUpdate(positionForSwap._id, {
-      order: positionToSwap.order
+      order: positionToSwap.order,
     });
     return true;
   } catch (error) {
