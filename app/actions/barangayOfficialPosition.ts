@@ -5,6 +5,7 @@ import {
   movePositionOrderUp,
   movePositionOrderDown,
   deleteBarangayOfficialPosition,
+  updateOfficialPosition,
 } from "@/db/barangayOfficialPosition/barangayOfficialPosition";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
@@ -18,6 +19,25 @@ export async function createOfficialPositionAction(title: string) {
       email: session?.user.email!,
       action: "CREATE",
       message: "Created a new barangay official position.",
+    });
+    revalidatePath("/admin/dashboard/barangay-officials");
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+export async function updateOfficialPositionAction(title: string, id: string) {
+  try {
+    const session = await auth();
+    await updateOfficialPosition({
+      title,
+      id,
+    });
+    await CreateLog({
+      email: session?.user.email!,
+      action: "DELETE",
+      message: "Deleted a barangay official position.",
     });
     revalidatePath("/admin/dashboard/barangay-officials");
     return true;

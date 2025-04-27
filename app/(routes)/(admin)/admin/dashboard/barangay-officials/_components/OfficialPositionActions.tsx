@@ -12,6 +12,7 @@ import { useState } from "react";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { OfficialPosition } from "@/types";
 import BarangayPositionDelete from "./BarangayPositionDelete";
+import BarangayPositionEdit from "./BarangayPositionEdit";
 
 function OfficialPositionActions({ row }: { row: OfficialPosition }) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -24,8 +25,7 @@ function OfficialPositionActions({ row }: { row: OfficialPosition }) {
         setIsOpen={setIEditOpen}
         title={"Edit Announcement"}
       >
-        {/* <AnnouncementEdit announcement={row} setIsOpen={setIEditOpen} /> */}
-        1
+        <BarangayPositionEdit position={row} setIsOpen={setIEditOpen} />
       </ResponsiveDialog>
 
       <ResponsiveDialog

@@ -37,6 +37,19 @@ export async function createOfficialPosition({ title }: { title: string }) {
   }
 }
 
+export async function updateOfficialPosition({title, id}: {title: string; id: string}){
+try {
+  await connectDB();
+  const updatePosition = await BarangayOfficialPositionModel.findByIdAndUpdate(id, {
+    title
+  })
+  return updatePosition;
+} catch (error) {
+  console.log(error);
+  throw error;
+}
+}
+
 export async function getLastPosition() {
   try {
     await connectDB();

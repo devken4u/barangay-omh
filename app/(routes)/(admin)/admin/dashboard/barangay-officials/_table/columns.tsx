@@ -20,7 +20,7 @@ export const columns: ColumnDef<OfficialPosition>[] = [
     header: "Position Title",
   },
   {
-    id: "actions",
+    id: "1_actions",
     cell: ({ row }) => {
       return (
         <ChangePositionOrder
@@ -30,7 +30,7 @@ export const columns: ColumnDef<OfficialPosition>[] = [
     },
   },
   {
-    id: "actions",
+    id: "2_actions",
     cell: ({ row }) => (
       <OfficialPositionActions row={row.original as OfficialPosition} />
     ),

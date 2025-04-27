@@ -1,10 +1,17 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Megaphone, Phone, SquareMenu } from "lucide-react";
+import {
+  Megaphone,
+  Phone,
+  SquareMenu,
+  File,
+  Home,
+  NotebookText,
+  Users,
+} from "lucide-react";
 import { useState } from "react";
 import { NavigationGroupLink } from "../_types/types";
 import { v4 as uuidv4 } from "uuid";
-import { Home, NotebookText } from "lucide-react";
 import NavigationGroupLinkComponent from "./NavigationGroupLinkComponent";
 
 export default function NavigationLinks() {
@@ -14,12 +21,18 @@ export default function NavigationLinks() {
     groupName: "Links",
     links: [
       { name: "Home", url: "/", key: uuidv4(), icon: Home },
-      { name: "About", url: "/about", key: uuidv4(), icon: NotebookText },
       {
         name: "Announcements",
         url: "/announcements",
         key: uuidv4(),
         icon: Megaphone,
+      },
+      { name: "About", url: "/about", key: uuidv4(), icon: NotebookText },
+      {
+        name: "Barangay Officials",
+        url: "/barangay-officials",
+        key: uuidv4(),
+        icon: Users,
       },
       {
         name: "Hotlines",

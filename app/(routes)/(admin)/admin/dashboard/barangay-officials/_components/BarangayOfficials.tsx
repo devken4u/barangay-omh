@@ -6,7 +6,7 @@ import BarangayOfficialCard from "./BarangayOfficialCard";
 
 type GroupedType = Official & { positionData: OfficialPosition };
 
-async function BarangayOfficials() {
+async function BarangayOfficials({ options = false }: { options?: boolean }) {
   const positions: OfficialPosition[] = await getOfficialPositions();
   const data: OfficialPosition[] = JSON.parse(JSON.stringify(positions));
 
@@ -18,7 +18,7 @@ async function BarangayOfficials() {
 
   return (
     <div>
-      <BarangayOfficialCreate positions={data} />
+      {options && <BarangayOfficialCreate positions={data} />}
       <div className="flex gap-2 justify-center sm:hidden my-4">
         <div>
           <img
@@ -79,7 +79,7 @@ async function BarangayOfficials() {
                     <BarangayOfficialCard
                       official={official}
                       key={official._id}
-                      options={true}
+                      options={options}
                     />
                   );
                 })}

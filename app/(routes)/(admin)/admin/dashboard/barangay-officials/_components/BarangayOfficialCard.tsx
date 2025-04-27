@@ -2,16 +2,22 @@ import { CircleHelp } from "lucide-react";
 import { Official, OfficialPosition } from "@/types";
 import { PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Popover } from "@/components/ui/popover";
+import BarangayOfficialDelete from "./BarangayOfficialDelete";
+import BarangayOfficialEdit from "./BarangayOfficialEdit";
+import { getOfficialPositions } from "@/db/barangayOfficialPosition/barangayOfficialPosition";
 
 type GroupedType = Official & { positionData: OfficialPosition };
 
-export default function BarangayOfficialCard({
+export default async function BarangayOfficialCard({
   official,
   options = false,
 }: {
   official: GroupedType;
   options?: boolean;
 }) {
+  const positions: OfficialPosition[] = await getOfficialPositions();
+  const data: OfficialPosition[] = JSON.parse(JSON.stringify(positions));
+
   return (
     <div className="max-w-64 w-64 p-4 border-2 shadow-md bg-white relative">
       <div className="absolute top-2 left-2 flex gap-2 items-start z-50">
@@ -25,7 +31,12 @@ export default function BarangayOfficialCard({
         </Popover>
       </div>
 
-      {options && <div className="absolute top-2 right-2 flex gap-2"></div>}
+      {options && (
+        <div className="absolute top-2 right-2 flex gap-2">
+          <BarangayOfficialEdit official={official} positions={data} />
+          <BarangayOfficialDelete official={official as Official} />
+        </div>
+      )}
       <div className="h-72 w-full">
         {official.image_url ? (
           <img

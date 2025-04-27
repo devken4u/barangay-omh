@@ -8,8 +8,9 @@ function PublicFooter() {
     groupName: "Links",
     links: [
       { name: "Home", url: "/", key: uuidv4() },
-      { name: "About", url: "/about", key: uuidv4() },
       { name: "Announcements", url: "/announcements", key: uuidv4() },
+      { name: "About", url: "/about", key: uuidv4() },
+      { name: "Barangay Officials", url: "/barangay-officials", key: uuidv4() },
       { name: "Hotlines", url: "/hotlines", key: uuidv4() },
     ],
   };

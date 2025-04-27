@@ -1,6 +1,12 @@
 "use client";
 import * as React from "react";
-import { MonitorCog, BookOpenText, House, LucideIcon } from "lucide-react";
+import {
+  MonitorCog,
+  BookOpenText,
+  House,
+  LucideIcon,
+  File,
+} from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -63,6 +69,24 @@ const data = {
           title: "Barangay Officials",
           url: "/admin/dashboard/barangay-officials",
           allowedRole: ["super-admin"],
+        },
+      ],
+    },
+    {
+      title: "Document",
+      url: "#",
+      icon: File,
+      isActive: true,
+      items: [
+        {
+          title: "Document Types",
+          url: "/admin/dashboard/document-types",
+          allowedRole: ["super-admin"],
+        },
+        {
+          title: "Verify Document",
+          url: "/admin/dashboard/articles",
+          allowedRole: ["admin", "super-admin"],
         },
       ],
     },

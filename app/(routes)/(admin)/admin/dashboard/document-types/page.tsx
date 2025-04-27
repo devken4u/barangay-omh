@@ -16,8 +16,8 @@ import {
   redirectIfNotAuthenticated,
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
-import OfficialPositions from "./_components/OfficialPositions";
-import BarangayOfficials from "./_components/BarangayOfficials";
+import DocumentTypeCreate from "./_components/DocumentTypeCreate";
+import DocumentTypeTable from "./_components/DocumentTypeTable";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
@@ -38,15 +38,19 @@ export default async function page() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Barangay Official</BreadcrumbPage>
+                  <BreadcrumbPage>Document Types</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="px-4 space-y-8 overflow-y-auto">
-          <OfficialPositions />
-          <BarangayOfficials options={true} />
+        <div className="flex flex-col p-4 pt-0 grow overflow-hidden space-y-4">
+          <div>
+            <DocumentTypeCreate />
+          </div>
+          <div className="grow overflow-auto">
+            <DocumentTypeTable />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

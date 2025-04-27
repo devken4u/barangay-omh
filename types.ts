@@ -57,3 +57,11 @@ export type Official = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type DocumentType = {
+  _id: string;
+  name: string;
+  is_disabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
