@@ -1,7 +1,11 @@
 "use server";
 
 import { uploadImage } from "@/lib/cloudinary";
-import { createBarangayOfficial, deleteBarangayOfficial, updateBarangayOfficial } from "@/db/barangayOfficial/barangayOfficial";
+import {
+  createBarangayOfficial,
+  deleteBarangayOfficial,
+  updateBarangayOfficial,
+} from "@/db/barangayOfficial/barangayOfficial";
 import { CreateLog } from "@/db/log/log";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
@@ -49,10 +53,10 @@ export async function createBarangayOfficialAction(_: any, formData: FormData) {
   }
 }
 
-export async function deleteBarangayOfficialAction(official: Official){
+export async function deleteBarangayOfficialAction(official: Official) {
   try {
     const session = await auth();
-    if(official.public_id){
+    if (official.public_id) {
       await deleteImage(official.public_id);
     }
     await deleteBarangayOfficial(official._id);
@@ -74,13 +78,13 @@ export async function editBarangayOfficialAction(formData: FormData) {
     const file = formData.get("file") as File;
     const currentPublicId = formData.get("currentPublicId");
 
-    if(currentPublicId && file ){
+    if (currentPublicId && file) {
       await deleteImage(currentPublicId as string);
     }
 
     let image = null;
-    if(file){
-       image = await uploadImage(file);
+    if (file) {
+      image = await uploadImage(file);
     }
 
     if (image) {

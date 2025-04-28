@@ -85,7 +85,7 @@ const data = {
         },
         {
           title: "Verify Document",
-          url: "/admin/dashboard/articles",
+          url: "/admin/dashboard/verify-documents",
           allowedRole: ["admin", "super-admin"],
         },
       ],
