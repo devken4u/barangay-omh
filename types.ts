@@ -65,3 +65,14 @@ export type DocumentType = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type VerifiedDocument = {
+  _id: string;
+  owner_name: string;
+  document_type: string;
+  remarks: string;
+  verified_link: string;
+  verified_by: string;
+  createdAt: string;
+  updatedAt: string;
+};

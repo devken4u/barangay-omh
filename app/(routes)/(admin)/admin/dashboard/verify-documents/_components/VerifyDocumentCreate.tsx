@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { Label } from "@/components/ui/label";
-import { DocumentType } from "@/types";
+import { DocumentType, VerifiedDocument } from "@/types";
 import {
   Select,
   SelectContent,
@@ -14,6 +14,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { createVerifiedDocumentAction } from "@/app/actions/verifiedDocument";
+import { Loader } from "lucide-react";
+import QRCode from "qrcode";
 
 function VerifyDocumentCreate({
   documentTypes,
@@ -23,7 +26,23 @@ function VerifyDocumentCreate({
   const [open, setOpen] = useState(false);
 
   const [state, action, isPending] = useActionState(
-    async (_: any, formData: FormData) => {},
+    async (_: any, formData: FormData) => {
+      return await createVerifiedDocumentAction({
+        document_type: formData.get("type") as string,
+        owner_name: formData.get("owner") as string,
+        remarks: formData.get("remarks") as string,
+      }).then(async (verifiedLink: string) => {
+        console.log(verifiedLink);
+        const dataUrl = await QRCode.toDataURL(verifiedLink, {
+          width: 500,
+        });
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = `${formData.get("owner")}-${formData.get("type")}.png`;
+        link.click();
+        setOpen(false);
+      });
+    },
     null
   );
 
@@ -36,6 +55,7 @@ function VerifyDocumentCreate({
         }}
         variant="outline"
       >
+        {isPending && <Loader className="animate-spin" />}
         Verify Document
       </Button>
       <ResponsiveDialog
@@ -94,7 +114,13 @@ function VerifyDocumentCreate({
             >
               Cancel
             </Button>
-            <Button type="submit" form="verify-document-form" size="sm">
+            <Button
+              disabled={isPending}
+              type="submit"
+              form="verify-document-form"
+              size="sm"
+            >
+              {isPending && <Loader className="animate-spin" />}
               Verify
             </Button>
           </div>

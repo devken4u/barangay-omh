@@ -38,7 +38,7 @@ export async function editDocumentTypeAction({
     await CreateLog({
       email: session?.user.email!,
       action: "UPDATE",
-      message: "Updated new document type.",
+      message: "Updated a document type.",
     });
     revalidatePath("/admin/dashboard/document-types");
     return true;
