@@ -25,3 +25,25 @@ export async function createVerifiedDocument({
     throw error;
   }
 }
+
+export async function getVerifiedDocuments() {
+  try {
+    await connectDB();
+    const verifiedDocuments = VerifiedDocumentModel.find().sort({
+      createdAt: "desc",
+    });
+    return verifiedDocuments;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getVerifiedDocumentById(id: string) {
+  try {
+    await connectDB();
+    const verifiedDocument = await VerifiedDocumentModel.findById(id);
+    return verifiedDocument;
+  } catch (error) {
+    throw error;
+  }
+}

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { Label } from "@/components/ui/label";
-import { DocumentType, VerifiedDocument } from "@/types";
+import { DocumentType } from "@/types";
 import {
   Select,
   SelectContent,
@@ -32,7 +32,6 @@ function VerifyDocumentCreate({
         owner_name: formData.get("owner") as string,
         remarks: formData.get("remarks") as string,
       }).then(async (verifiedLink: string) => {
-        console.log(verifiedLink);
         const dataUrl = await QRCode.toDataURL(verifiedLink, {
           width: 500,
         });

@@ -19,6 +19,7 @@ import {
 import VerifyDocumentCreate from "./_components/VerifyDocumentCreate";
 import { getDocumentTypes } from "@/db/documentType/documentType";
 import { DocumentType } from "@/types";
+import VerifiedDocumentsTable from "./_components/VerifiedDocumentsTable";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
@@ -52,7 +53,9 @@ export default async function page() {
           <div>
             <VerifyDocumentCreate documentTypes={data} />
           </div>
-          <div className="grow overflow-auto"></div>
+          <div className="grow overflow-auto">
+            <VerifiedDocumentsTable />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
