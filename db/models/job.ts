@@ -23,16 +23,17 @@ const JobSchema = new Schema(
       type: String,
       required: true,
     },
-    is_approved: {
-      type: Boolean,
-      default: false,
+    request_status: {
+      type: String,
+      enum: ["pending", "rejected", "approved"],
+      default: "pending",
     },
     is_closed: {
-      type: String,
+      type: Boolean,
       default: false,
     },
-    approved_by: {
-      type: Boolean,
+    request_status_updated_by: {
+      type: String,
     },
     created_by: {
       type: String,

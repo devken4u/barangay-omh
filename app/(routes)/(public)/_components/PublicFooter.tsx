@@ -18,7 +18,7 @@ function PublicFooter() {
 
   const footerGroupLinkServices: Type = {
     groupName: "Services",
-    links: [{ name: "Job Board", url: "/", key: uuidv4() }],
+    links: [{ name: "Job Board", url: "/job-board", key: uuidv4() }],
   };
 
   return (

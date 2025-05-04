@@ -52,10 +52,100 @@ export async function getUserPostedJobs(email: string) {
   }
 }
 
+export async function getRequestedJobs({
+  limit,
+  skip,
+}: {
+  limit: number;
+  skip: number;
+}) {
+  try {
+    await connectDB();
+    const articles = await JobModel.find({
+      request_status: "pending",
+      is_closed: false,
+    })
+      .sort({
+        updatedAt: "desc",
+      })
+      .limit(limit)
+      .skip(skip);
+    const total = await JobModel.find({ request_status: "pending" });
+    return {
+      data: JSON.parse(JSON.stringify(articles)),
+      total: total.length,
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function deleteJob(id: string) {
   try {
     await connectDB();
     const job = await JobModel.findByIdAndDelete(id);
+    return job;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function approveJobRequest({
+  id,
+  request_status_updated_by,
+}: {
+  id: string;
+  request_status_updated_by: string;
+}) {
+  try {
+    await connectDB();
+    const job = await JobModel.findByIdAndUpdate(id, {
+      request_status: "approved",
+      request_status_updated_by,
+    });
+    return job;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function rejectJobRequest({
+  id,
+  request_status_updated_by,
+}: {
+  id: string;
+  request_status_updated_by: string;
+}) {
+  try {
+    await connectDB();
+    const job = await JobModel.findByIdAndUpdate(id, {
+      request_status: "rejected",
+      request_status_updated_by,
+    });
+    return job;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function closeJobRequest(id: string) {
+  try {
+    await connectDB();
+    const job = await JobModel.findByIdAndUpdate(id, {
+      is_closed: true,
+    });
+    return job;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function openJobRequest(id: string) {
+  try {
+    await connectDB();
+    const job = await JobModel.findByIdAndUpdate(id, {
+      is_closed: false,
+    });
     return job;
   } catch (error) {
     throw error;

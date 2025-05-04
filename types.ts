@@ -104,9 +104,9 @@ export type Job = {
   company_name: string;
   company_address: string;
   contact_number: string;
-  is_approved: boolean;
+  request_status: "pending" | "rejected" | "approved";
   is_closed: boolean;
-  approved_by?: string;
+  request_status_updated_by?: string;
   created_by: string;
   createdAt: string;
   updatedAt: string;

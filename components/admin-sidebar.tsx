@@ -6,6 +6,7 @@ import {
   House,
   LucideIcon,
   File,
+  ChartColumnIncreasing,
 } from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
@@ -87,6 +88,19 @@ const data = {
           title: "Verify Document",
           url: "/admin/dashboard/verify-documents",
           allowedRole: ["admin", "super-admin"],
+        },
+      ],
+    },
+    {
+      title: "Services",
+      url: "#",
+      icon: ChartColumnIncreasing,
+      isActive: true,
+      items: [
+        {
+          title: "Job Posting Requests",
+          url: "/admin/dashboard/job-posting-request",
+          allowedRole: ["super-admin", "admin"],
         },
       ],
     },

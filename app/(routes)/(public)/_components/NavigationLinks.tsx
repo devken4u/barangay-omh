@@ -46,7 +46,9 @@ export default function NavigationLinks() {
 
   const navigationGroupServices: NavigationGroupLink = {
     groupName: "Services",
-    links: [{ name: "Job Board", url: "/", key: uuidv4(), icon: Home }],
+    links: [
+      { name: "Job Board", url: "/job-board", key: uuidv4(), icon: Home },
+    ],
   };
 
   return (
