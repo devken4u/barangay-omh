@@ -76,3 +76,40 @@ export type VerifiedDocument = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Log = {
+  _id: string;
+  action:
+    | "LOGIN"
+    | "LOGOUT"
+    | "REGISTER"
+    | "FAILED_LOGIN"
+    | "EMAIL_VERIFICATION"
+    | "VERIFY_EMAIL_REQUEST"
+    | "PASSWORD_RESET"
+    | "PASSWORD_RESET_REQUEST"
+    | "CREATE"
+    | "DELETE"
+    | "UPDATE";
+  message: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Job = {
+  _id: string;
+  job_titles: string;
+  job_description: string;
+  company_name: string;
+  company_address: string;
+  contact_number: string;
+  is_approved: boolean;
+  is_closed: boolean;
+  approved_by?: string;
+  created_by: string;
+  createdAt: string;
+  updatedAt: string;
+  image_url?: string;
+  public_id?: string;
+};

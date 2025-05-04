@@ -4,10 +4,10 @@ import {
   Megaphone,
   Phone,
   SquareMenu,
-  File,
   Home,
   NotebookText,
   Users,
+  Newspaper,
 } from "lucide-react";
 import { useState } from "react";
 import { NavigationGroupLink } from "../_types/types";
@@ -28,6 +28,7 @@ export default function NavigationLinks() {
         icon: Megaphone,
       },
       { name: "About", url: "/about", key: uuidv4(), icon: NotebookText },
+      { name: "Article", url: "/article", key: uuidv4(), icon: Newspaper },
       {
         name: "Barangay Officials",
         url: "/barangay-officials",

@@ -32,3 +32,13 @@ export async function CreateLog({
     return error;
   }
 }
+
+export async function getLogs() {
+  try {
+    await connectDB();
+    const logs = await LogModel.find().sort({ createdAt: "desc" });
+    return logs;
+  } catch (error) {
+    throw error;
+  }
+}

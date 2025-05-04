@@ -128,6 +128,32 @@ export async function getAllPublishedArticles({
     throw error;
   }
 }
+export async function getPublishedArticleById(id: string) {
+  try {
+    await connectDB();
+    const article = await ArticleModel.findById({ _id: id });
+    return article;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function getFeaturedArticles(args?: {
+  limit?: number;
+  skip?: number;
+}) {
+  try {
+    await connectDB();
+    const articles = await ArticleModel.find({
+      is_published: true,
+    })
+      .sort({ createdAt: "desc" })
+      .skip(args?.skip || 0)
+      .limit(args?.limit || 10);
+    return articles;
+  } catch (error) {
+    throw error;
+  }
+}
 
 //
 

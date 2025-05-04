@@ -10,6 +10,7 @@ function PublicFooter() {
       { name: "Home", url: "/", key: uuidv4() },
       { name: "Announcements", url: "/announcements", key: uuidv4() },
       { name: "About", url: "/about", key: uuidv4() },
+      { name: "Article", url: "/article", key: uuidv4() },
       { name: "Barangay Officials", url: "/barangay-officials", key: uuidv4() },
       { name: "Hotlines", url: "/hotlines", key: uuidv4() },
     ],
@@ -22,8 +23,11 @@ function PublicFooter() {
 
   return (
     <footer className="bg-primary text-background p-8">
-      <div className="grid grid-cols-3">
-        <h1 className="text-3xl font-bold">BARANGAY 174 OMH</h1>
+      <h1 className="text-3xl font-bold block lg:hidden mb-4">
+        BARANGAY 174 OMH
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <h1 className="text-3xl font-bold hidden lg:block">BARANGAY 174 OMH</h1>
         <FooterGroupLink footerGroupLinks={footerGroupLinkLinks} />
         <FooterGroupLink footerGroupLinks={footerGroupLinkServices} />
       </div>

@@ -4,7 +4,11 @@ import { ImageIcon } from "lucide-react";
 
 function ArticleCard({ article }: { article: Article }) {
   return (
-    <div className="border p-4 rounded-md">
+    <a
+      className="border p-4 rounded-md block hover:cursor-pointer"
+      href={`/article/${article._id}`}
+      target="_blank"
+    >
       {article.image_url ? (
         <div className="w-full h-52">
           <img className="size-full" src={article.image_url} />
@@ -19,7 +23,7 @@ function ArticleCard({ article }: { article: Article }) {
       <p className="text-sm">
         Published date: {formateDateV1(article.published_date)}
       </p>
-    </div>
+    </a>
   );
 }
 

@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { House, LucideIcon } from "lucide-react";
+import { BookOpenText, LucideIcon } from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -16,14 +16,14 @@ import { SidebarHead } from "./SidebarHead";
 const data = {
   content: [
     {
-      title: "Homepage",
+      title: "Content",
       url: "#",
-      icon: House,
+      icon: BookOpenText,
       isActive: true,
       items: [
         {
-          title: "test",
-          url: "/",
+          title: "Job Board",
+          url: "/user/dashboard/job-board",
           allowedRole: ["user"],
         },
       ],
