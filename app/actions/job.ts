@@ -5,6 +5,7 @@ import {
   createJob,
   deleteJob,
   getRequestedJobs,
+  getApprovedJobs,
   approveJobRequest,
   rejectJobRequest,
   closeJobRequest,
@@ -91,6 +92,25 @@ export async function getRequestedJobsAction({
 }) {
   try {
     const jobs = await getRequestedJobs({ limit, skip });
+    return {
+      data: jobs.data,
+      pages: Math.ceil(jobs.total / limit),
+      total: jobs.total,
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getApprovedJobsAction({
+  limit = 20,
+  skip = 0,
+}: {
+  limit?: number;
+  skip?: number;
+}) {
+  try {
+    const jobs = await getApprovedJobs({ limit, skip });
     return {
       data: jobs.data,
       pages: Math.ceil(jobs.total / limit),

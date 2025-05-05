@@ -1,3 +1,4 @@
+import MissionVision from "@/components/MissionVision";
 import Announcements from "./_components/Announcements";
 import Articles from "./_components/article/Articles";
 import FeaturedPhotos from "./_components/FeaturedPhotos";
@@ -8,7 +9,7 @@ import Hotlines from "./_components/Hotlines";
 
 function HomePage() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 mb-8">
       <HomepageHero />
       <div className="px-8 grid gap-2">
         <div className="grid grid-cols-2 gap-8">
@@ -21,8 +22,9 @@ function HomePage() {
         </div>
       </div>
       <Articles />
+      <MissionVision />
     </div>
-  );  
+  );
 }
 
 export default HomePage;

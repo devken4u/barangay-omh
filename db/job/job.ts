@@ -70,7 +70,41 @@ export async function getRequestedJobs({
       })
       .limit(limit)
       .skip(skip);
-    const total = await JobModel.find({ request_status: "pending" });
+    const total = await JobModel.find({
+      request_status: "pending",
+      is_closed: false,
+    });
+    return {
+      data: JSON.parse(JSON.stringify(articles)),
+      total: total.length,
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getApprovedJobs({
+  limit,
+  skip,
+}: {
+  limit: number;
+  skip: number;
+}) {
+  try {
+    await connectDB();
+    const articles = await JobModel.find({
+      request_status: "approved",
+      is_closed: false,
+    })
+      .sort({
+        updatedAt: "desc",
+      })
+      .limit(limit)
+      .skip(skip);
+    const total = await JobModel.find({
+      request_status: "approved",
+      is_closed: false,
+    });
     return {
       data: JSON.parse(JSON.stringify(articles)),
       total: total.length,
