@@ -11,9 +11,9 @@ function copyToClipboard(text: string) {
 
 function HotlineItem({ hotline }: { hotline: Hotline }) {
   return (
-    <div className="flex items-center">
+    <div className="sm:flex sm:items-center">
       <div className="w-full bg-destructive text-background font-bold p-2">
-        <p className="text-right">{hotline.label}</p>
+        <p className="sm:text-right">{hotline.label}</p>
       </div>
       <button
         onClick={() => {
