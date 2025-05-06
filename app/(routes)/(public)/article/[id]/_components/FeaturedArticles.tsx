@@ -45,7 +45,7 @@ async function FeaturedArticles({
     );
   }
   return (
-    <div className="grid [grid-template-columns:repeat(auto-fill,minmax(400px,1fr))] gap-8 overflow-y-auto p-4">
+    <div className="grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-8 overflow-y-auto p-4">
       {articles.length > 0 &&
         articles.map((article) => {
           return (

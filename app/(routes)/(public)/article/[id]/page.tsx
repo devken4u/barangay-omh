@@ -16,10 +16,10 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
 
   if (article) {
     return (
-      <div className="flex container mx-auto space-x-6 mb-4">
-        <div className=" px-2 grow ">
+      <div className="flex mx-auto space-x-0 lg:space-x-6 mb-4 w-full">
+        <div className="px-2 grow w-full">
           {article.image_url && (
-            <div className="h-96 mb-8">
+            <div className="h-96 mb-8 w-full">
               <img
                 src={article.image_url}
                 alt="article-picture"
@@ -53,7 +53,7 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
             <div className="block lg:hidden">
               <FeaturedArticles limit={10} orientation="h" />
             </div>
-            <FeaturedArticles limit={6} skip={10} orientation="h" />
+            {/* <FeaturedArticles limit={6} skip={10} orientation="h" /> */}
           </div>
         </div>
         <div className="hidden lg:block">
