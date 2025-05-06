@@ -12,6 +12,7 @@ function PublicFooter() {
       { name: "About", url: "/about", key: uuidv4() },
       { name: "Article", url: "/article", key: uuidv4() },
       { name: "Barangay Officials", url: "/barangay-officials", key: uuidv4() },
+      { name: "Barangay Calendar", url: "/barangay-calendar", key: uuidv4() },
       { name: "Hotlines", url: "/hotlines", key: uuidv4() },
     ],
   };

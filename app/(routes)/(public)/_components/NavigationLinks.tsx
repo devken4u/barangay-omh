@@ -8,6 +8,7 @@ import {
   NotebookText,
   Users,
   Newspaper,
+  Calendar,
 } from "lucide-react";
 import { useState } from "react";
 import { NavigationGroupLink } from "../_types/types";
@@ -34,6 +35,12 @@ export default function NavigationLinks() {
         url: "/barangay-officials",
         key: uuidv4(),
         icon: Users,
+      },
+      {
+        name: "Barangay Calendar",
+        url: "/barangay-calendar",
+        key: uuidv4(),
+        icon: Calendar,
       },
       {
         name: "Hotlines",
