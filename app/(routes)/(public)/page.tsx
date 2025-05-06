@@ -20,6 +20,7 @@ function HomePage() {
             <Announcements />
           </div>
         </div>
+        <HappeningToday />
       </div>
       <Articles />
       <MissionVision />

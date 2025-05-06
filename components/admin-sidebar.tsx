@@ -71,6 +71,11 @@ const data = {
           url: "/admin/dashboard/barangay-officials",
           allowedRole: ["super-admin"],
         },
+        {
+          title: "Calendar",
+          url: "/admin/dashboard/calendar",
+          allowedRole: ["super-admin"],
+        },
       ],
     },
     {

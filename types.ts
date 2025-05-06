@@ -113,3 +113,11 @@ export type Job = {
   image_url?: string;
   public_id?: string;
 };
+
+export type CalendarEvent = {
+  _id: string;
+  event_name: string;
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+};

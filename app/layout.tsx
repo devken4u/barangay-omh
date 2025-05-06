@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import "rsuite/dist/rsuite-no-reset.min.css";
+
 import { Toaster } from "react-hot-toast";
 
 import "./(routes)/globals.css";
