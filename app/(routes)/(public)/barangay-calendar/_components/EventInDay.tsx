@@ -21,6 +21,7 @@ function EventInDay({ date }: { date: string }) {
     <div className="border-2 border-primary p-4 rounded-md">
       <h1 className="text-xl font-bold">Event(s) in {formateDateV1(date)}</h1>
       <div className="space-y-2 mt-2">
+        {!state || (state.length < 1 && "Empty")}
         {isPending && <Loader className="animate-spin" />}
         <ul className="list-disc pl-8">
           {state &&

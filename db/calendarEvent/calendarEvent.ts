@@ -32,24 +32,6 @@ export async function getCalendarDayEvents(date: string) {
   }
 }
 
-export async function editCalendarEvent({
-  id,
-  event_name,
-}: {
-  id: string;
-  event_name: string;
-}) {
-  try {
-    await connectDB();
-    const event = await CalendarEventModel.findByIdAndUpdate(id, {
-      event_name,
-    });
-    return event;
-  } catch (error) {
-    throw error;
-  }
-}
-
 export async function deleteCalendarEvent(id: string) {
   try {
     await connectDB();
@@ -64,6 +46,18 @@ export async function getDaysWithCalendarEvent() {
   try {
     const days = await CalendarEventModel.distinct("date");
     return days;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getCalendarEventsByYear(year: string) {
+  try {
+    await connectDB();
+    const events = await CalendarEventModel.find({
+      date: { $regex: `^${year}` },
+    }).sort({ date: 1 });
+    return events;
   } catch (error) {
     throw error;
   }

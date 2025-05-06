@@ -5,9 +5,9 @@ import { auth } from "@/auth";
 import {
   createCalendarEvent,
   deleteCalendarEvent,
-  editCalendarEvent,
   getCalendarDayEvents,
   getDaysWithCalendarEvent,
+  getCalendarEventsByYear,
 } from "@/db/calendarEvent/calendarEvent";
 import { CalendarEvent } from "@/types";
 
@@ -65,6 +65,16 @@ export async function deleteCalendarEventAction(id: string) {
       message: "Deleted a calendar event.",
     });
     return true;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getCalendarEventsByYearAction(year: string) {
+  try {
+    const events = await getCalendarEventsByYear(year);
+    const data: CalendarEvent[] = JSON.parse(JSON.stringify(events));
+    return data;
   } catch (error) {
     throw error;
   }
