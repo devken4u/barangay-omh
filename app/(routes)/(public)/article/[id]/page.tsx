@@ -50,10 +50,15 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
             )}
           </div>
           <div className="mt-8">
+            <div className="block lg:hidden">
+              <FeaturedArticles limit={10} orientation="h" />
+            </div>
             <FeaturedArticles limit={6} skip={10} orientation="h" />
           </div>
         </div>
-        <FeaturedArticles limit={10} />
+        <div className="hidden lg:block">
+          <FeaturedArticles limit={10} />
+        </div>
       </div>
     );
   }

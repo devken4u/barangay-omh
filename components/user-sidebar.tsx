@@ -26,6 +26,11 @@ const data = {
           url: "/user/dashboard/job-board",
           allowedRole: ["user"],
         },
+        {
+          title: "Business Listing",
+          url: "/user/dashboard/business-listing",
+          allowedRole: ["user"],
+        },
       ],
     },
   ],

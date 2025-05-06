@@ -121,3 +121,18 @@ export type CalendarEvent = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Business = {
+  _id: string;
+  event_name: string;
+  business_name: string;
+  business_address: string;
+  business_description: string;
+  business_contact: string;
+  request_status: "pending" | "rejected" | "approved";
+  is_closed: boolean;
+  request_status_updated_by?: string;
+  created_by: string;
+  createdAt: string;
+  updatedAt: string;
+};
