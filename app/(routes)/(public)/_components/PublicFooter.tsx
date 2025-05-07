@@ -14,6 +14,7 @@ function PublicFooter() {
       { name: "Barangay Officials", url: "/barangay-officials", key: uuidv4() },
       { name: "Barangay Calendar", url: "/barangay-calendar", key: uuidv4() },
       { name: "Hotlines", url: "/hotlines", key: uuidv4() },
+      { name: "Online Queuing", url: "/online-queuing", key: uuidv4() },
     ],
   };
 

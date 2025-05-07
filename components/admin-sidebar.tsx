@@ -107,6 +107,11 @@ const data = {
           url: "/admin/dashboard/job-posting-request",
           allowedRole: ["super-admin", "admin"],
         },
+        {
+          title: "Online queuing",
+          url: "/admin/dashboard/online-queuing",
+          allowedRole: ["super-admin", "admin"],
+        },
       ],
     },
     {

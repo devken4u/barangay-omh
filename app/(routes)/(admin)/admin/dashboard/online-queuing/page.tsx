@@ -1,4 +1,4 @@
-import { UserSidebar } from "@/components/user-sidebar";
+import { AdminSidebar } from "@/components/admin-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,16 +16,16 @@ import {
   redirectIfNotAuthenticated,
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
-import BusinessModel from "@/db/models/business";
-import BusinessPost from "./_components/BusinessPost";
-import BusinessList from "./_components/BusinessList";
+import QueueAdd from "./_components/QueueAdd";
+import QueueList from "./_components/QueueList";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
-  await redirectIfRoleNotAuthorized(["user"], "/");
+  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
+
   return (
     <SidebarProvider>
-      <UserSidebar />
+      <AdminSidebar />
       <SidebarInset className="h-screen overflow-hidden flex flex-col">
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
@@ -34,11 +34,11 @@ export default async function page() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbPage>Dashboard</BreadcrumbPage>
+                  <BreadcrumbPage>Homepage</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbPage>Business Listing</BreadcrumbPage>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Online queuing</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -46,10 +46,10 @@ export default async function page() {
         </header>
         <div className="flex flex-col p-4 pt-0 grow overflow-hidden">
           <div>
-            <BusinessPost />
+            <QueueAdd />
           </div>
           <div className="grow overflow-auto py-4">
-            <BusinessList />
+            <QueueList />
           </div>
         </div>
       </SidebarInset>

@@ -9,6 +9,7 @@ import {
   Users,
   Newspaper,
   Calendar,
+  UserSearch,
 } from "lucide-react";
 import { useState } from "react";
 import { NavigationGroupLink } from "../_types/types";
@@ -47,6 +48,12 @@ export default function NavigationLinks() {
         url: "/hotlines",
         key: uuidv4(),
         icon: Phone,
+      },
+      {
+        name: "Online Queuing",
+        url: "/online-queuing",
+        key: uuidv4(),
+        icon: UserSearch,
       },
     ],
   };

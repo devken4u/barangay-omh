@@ -122,17 +122,9 @@ export type CalendarEvent = {
   updatedAt: string;
 };
 
-export type Business = {
+export type Queue = {
   _id: string;
-  event_name: string;
-  business_name: string;
-  business_address: string;
-  business_description: string;
-  business_contact: string;
-  request_status: "pending" | "rejected" | "approved";
-  is_closed: boolean;
-  request_status_updated_by?: string;
-  created_by: string;
+  person_name: string;
   createdAt: string;
   updatedAt: string;
 };
