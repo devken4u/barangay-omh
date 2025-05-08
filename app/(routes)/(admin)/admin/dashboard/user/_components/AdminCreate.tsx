@@ -16,11 +16,18 @@ function AdminCreate() {
     async (_: any, formData: FormData) => {
       return await createAdminAction({
         email: formData.get("email") as string,
-        password: formData.get("passowrd") as string,
-      }).then(() => {
-        setOpen(false);
-        toast.success("Admin account created.");
-      });
+        password: formData.get("password") as string,
+      })
+        .then(() => {
+          setOpen(false);
+          toast.success("Admin account created.");
+        })
+        .catch(() => {
+          setOpen(false);
+          toast.error(
+            "Admin account creation failed, please check if the email is duplicated"
+          );
+        });
     },
     null
   );
@@ -57,6 +64,7 @@ function AdminCreate() {
           <div className="space-y-1">
             <Label htmlFor="password">Password</Label>
             <Input
+              minLength={8}
               required
               id="password"
               placeholder="Password"

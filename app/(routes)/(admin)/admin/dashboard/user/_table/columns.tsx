@@ -67,4 +67,8 @@ export const columns: ColumnDef<User>[] = [
       return formateDateV1(row.original.createdAt);
     },
   },
+  {
+    id: "actions",
+    cell: ({ row }) => <UserAction row={row.original as User} />,
+  },
 ];

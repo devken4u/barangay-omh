@@ -29,32 +29,47 @@ function VerifiedStatus({ row }: { row: User }) {
     null
   );
 
-  return (
-    <Select
-      disabled={isPending}
-      value={status}
-      onValueChange={(value) => {
-        const formData = new FormData();
-        formData.append("status", value);
-        startTransition(() => {
-          action(formData);
-        });
-        setStatus(value);
-      }}
-    >
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Account status" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="true">
-          <span className="text-green-500 font-semibold">Verified</span>
-        </SelectItem>
-        <SelectItem value="false">
-          <span className="text-red-500 font-semibold">Unverified</span>
-        </SelectItem>
-      </SelectContent>
-    </Select>
-  );
+  if (row.role !== "super-admin") {
+    return (
+      <Select
+        disabled={isPending}
+        value={status}
+        onValueChange={(value) => {
+          const formData = new FormData();
+          formData.append("status", value);
+          startTransition(() => {
+            action(formData);
+          });
+          setStatus(value);
+        }}
+      >
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Account status" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="true">
+            <span className="text-green-500 font-semibold">Verified</span>
+          </SelectItem>
+          <SelectItem value="false">
+            <span className="text-red-500 font-semibold">Unverified</span>
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    );
+  } else {
+    return (
+      <Select value="true" disabled={true}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Account status" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="true">
+            <span className="text-green-500 font-semibold">Verified</span>
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    );
+  }
 }
 
 export default VerifiedStatus;

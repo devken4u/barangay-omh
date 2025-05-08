@@ -402,10 +402,23 @@ export async function createAdminAction({
   password: string
 }){
   try {
-    await createAdmin({email, password});
+    const hashedPassword = bcrypt.hashSync(password, 12);
+    await createAdmin({email, password: hashedPassword});
     revalidatePath("/admin/dashboard/user");
     return true;
   } catch (error) {
     throw error
+  }
+}
+
+export async function resetUserPasswordByAdminAction(
+  email: string,
+  newPassword: string
+) {
+  try {
+    await resetPassword(email, newPassword);
+    return true;
+  } catch (error) {
+    return error;
   }
 }

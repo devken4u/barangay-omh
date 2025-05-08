@@ -7,34 +7,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, SquarePen, Trash2 } from "lucide-react";
+import { MoreHorizontal, SquarePen, LockKeyhole } from "lucide-react";
 import { useState } from "react";
-// import { Announcement } from "../announcement-table/columns";
-// import AnnouncementEdit from "./AnnoucementEdit";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { User } from "@/types";
+import ResetPassword from "./ResetPassword";
 
 function UserAction({ row }: { row: User }) {
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [iEditOpen, setIEditOpen] = useState(false);
+  const [isResetOpen, setIsResetOpen] = useState(false);
 
   return (
     <>
-      {/* <ResponsiveDialog
-        isOpen={iEditOpen}
-        setIsOpen={setIEditOpen}
-        title={"Edit Announcement"}
-      >
-        <AnnouncementEdit announcement={row} setIsOpen={setIEditOpen} />
-      </ResponsiveDialog>
-
       <ResponsiveDialog
-        isOpen={isDeleteOpen}
-        setIsOpen={setIsDeleteOpen}
-        title={"Delete Announcement?"}
+        isOpen={isResetOpen}
+        setIsOpen={setIsResetOpen}
+        title={"Reset Password?"}
       >
-        <AnnouncementDelete id={row._id} setIsOpen={setIsDeleteOpen} />
-      </ResponsiveDialog> */}
+        <ResetPassword user={row} setIsOpen={setIsResetOpen} />
+      </ResponsiveDialog>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -46,24 +36,13 @@ function UserAction({ row }: { row: User }) {
           <DropdownMenuItem>
             <button
               onClick={() => {
-                setIEditOpen(true);
-              }}
-              className="w-full justify-start flex hover:cursor-pointer"
-            >
-              <IconMenu text="Edit" icon={<SquarePen className="h-4 w-4" />} />
-            </button>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">
-            <button
-              onClick={() => {
-                setIsDeleteOpen(true);
+                setIsResetOpen(true);
               }}
               className="w-full justify-start flex hover:cursor-pointer"
             >
               <IconMenu
-                text="Delete"
-                icon={<Trash2 className="h-4 w-4 text-destructive" />}
+                text="Reset"
+                icon={<LockKeyhole className="h-4 w-4" />}
               />
             </button>
           </DropdownMenuItem>
