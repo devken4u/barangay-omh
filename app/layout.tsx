@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 
 import "./(routes)/globals.css";
 import { SessionProvider } from "next-auth/react";
+import AiAgent from "@/components/AiAgent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         <Toaster position="top-right" reverseOrder={true} />
         <SessionProvider>{children}</SessionProvider>
+        <AiAgent />
       </body>
     </html>
   );

@@ -16,7 +16,7 @@ function HomepageHero() {
             towards development and providing essential services.
           </h2>
           <div className="flex justify-center mt-20">
-            <a href="#text">
+            <a href="#content">
               <Button className="font-bold animate-bounce">
                 EXPLORE <ArrowRight />
               </Button>

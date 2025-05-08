@@ -4,6 +4,7 @@ import PasswordVerificationModel from "../models/password_reset_token";
 import { connectDB } from "../connection/connection";
 import { CreateLog } from "../log/log";
 import bcrypt from "bcryptjs";
+import { use } from "react";
 
 export async function getUserByEmail(email: string) {
   //connect to database
@@ -102,35 +103,41 @@ export async function resetPassword(email: string, newPassword: string) {
     return error;
   }
 }
-export async function getUsers(){
+export async function getUsers() {
   try {
     await connectDB();
     const users = await UserModel.find().sort({
-      createdAt: "desc"
+      createdAt: "desc",
     });
     return users;
   } catch (error) {
     throw error;
   }
 }
-export async function updateAccountStatus({id, is_verified}: {id: string; is_verified: boolean}){
-try {
-  await connectDB();
-  const user = await UserModel.findByIdAndUpdate(id, {
-    is_verified
-  })
-  return user;
-} catch (error) {
-  throw error;
-}
+export async function updateAccountStatus({
+  id,
+  is_verified,
+}: {
+  id: string;
+  is_verified: boolean;
+}) {
+  try {
+    await connectDB();
+    const user = await UserModel.findByIdAndUpdate(id, {
+      is_verified,
+    });
+    return user;
+  } catch (error) {
+    throw error;
+  }
 }
 export async function createAdmin({
   email,
-  password
+  password,
 }: {
   email: string;
-  password: string
-}){
+  password: string;
+}) {
   try {
     await connectDB();
     const admin = await UserModel.create({
@@ -138,10 +145,65 @@ export async function createAdmin({
       password,
       is_verified: true,
       role: "admin",
-      email_type: "credentials"
-    })
+      email_type: "credentials",
+    });
     return admin;
   } catch (error) {
-    throw error
+    throw error;
+  }
+}
+
+export async function updateAccount({
+  firstname,
+  middlename,
+  lastname,
+  birthday,
+  email,
+}: {
+  firstname?: string;
+  middlename?: string;
+  lastname?: string;
+  birthday?: string;
+  email: string;
+}) {
+  try {
+    await connectDB();
+    const user = await UserModel.findOneAndUpdate(
+      { email },
+      {
+        $set: {
+          firstname,
+          middlename,
+          lastname,
+          birthday,
+        },
+      }
+    );
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function updatePassword({
+  email,
+  newPassword,
+}: {
+  email: string;
+  newPassword: string;
+}) {
+  try {
+    await connectDB();
+    const user = await UserModel.findOneAndUpdate(
+      { email },
+      {
+        $set: {
+          password: newPassword,
+        },
+      }
+    );
+    return user;
+  } catch (error) {
+    throw error;
   }
 }

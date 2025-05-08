@@ -1,4 +1,4 @@
-import { AdminSidebar } from "@/components/admin-sidebar";
+import { UserSidebar } from "@/components/user-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,6 +16,7 @@ import {
   redirectIfNotAuthenticated,
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
+
 import UserInformation from "./_components/UserInformation";
 import { getUserByEmail } from "@/db/user/user";
 import { auth } from "@/auth";
@@ -23,7 +24,7 @@ import { User } from "@/types";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
-  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
+  await redirectIfRoleNotAuthorized(["user"], "/");
 
   const session = await auth();
   const data = await getUserByEmail(session?.user.email!);
@@ -31,7 +32,7 @@ export default async function page() {
 
   return (
     <SidebarProvider>
-      <AdminSidebar />
+      <UserSidebar />
       <SidebarInset className="h-screen overflow-hidden flex flex-col">
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
@@ -40,10 +41,10 @@ export default async function page() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbPage>Homepage</BreadcrumbPage>
+                  <BreadcrumbPage>Dashboard</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
+                <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbPage>Settings</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>

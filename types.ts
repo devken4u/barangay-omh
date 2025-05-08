@@ -136,10 +136,10 @@ export type User = {
   email_type: "google" | "credentials";
   is_verified: boolean;
   role: "admin" | "super-admin" | "user";
-  firtname: string;
+  firstname: string;
   middlename: string;
   lastname: string;
   birthday: string;
   createdAt: string;
   updatedAt: string;
-}
+};
