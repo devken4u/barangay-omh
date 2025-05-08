@@ -7,6 +7,7 @@ import {
   LucideIcon,
   File,
   ChartColumnIncreasing,
+  User,
 } from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
@@ -129,6 +130,19 @@ const data = {
           title: "Log",
           url: "/admin/dashboard/log",
           allowedRole: ["super-admin"],
+        },
+      ],
+    },
+    {
+      title: "Profile",
+      url: "#",
+      icon: User,
+      isActive: true,
+      items: [
+        {
+          title: "Settings",
+          url: "/admin/dashboard/profile-settings",
+          allowedRole: ["super-admin", "admin"],
         },
       ],
     },

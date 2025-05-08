@@ -128,3 +128,18 @@ export type Queue = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type User = {
+  _id: string;
+  email: string;
+  password?: string;
+  email_type: "google" | "credentials";
+  is_verified: boolean;
+  role: "admin" | "super-admin" | "user";
+  firtname: string;
+  middlename: string;
+  lastname: string;
+  birthday: string;
+  createdAt: string;
+  updatedAt: string;
+}

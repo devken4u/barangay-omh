@@ -4,7 +4,7 @@ import { createUser } from "@/db/user/user";
 import { RegisterSchema } from "@/lib/zod";
 import { RegisterType } from "@/lib/zod";
 import bcrypt from "bcryptjs";
-import { getUserByEmail } from "@/db/user/user";
+import { getUserByEmail, updateAccountStatus, createAdmin } from "@/db/user/user";
 import { getTokenByUserEmail } from "@/db/emailVerificationToken/emailVerificationToken";
 import { verifyToken } from "@/lib/utils";
 import { signToken } from "@/lib/utils";
@@ -15,6 +15,8 @@ import { insertNewPasswordResetToken } from "@/db/passwordResetToken/passwordRes
 import { resetPassword } from "@/db/user/user";
 import { CreateLog } from "@/db/log/log";
 import { deleteResetPasswordTokenByToken } from "@/db/passwordResetToken/passwordResetToken";
+import { revalidatePath } from "next/cache";
+
 
 export async function registerUserAction(_1: any, formData: FormData) {
   const user: RegisterType = {
@@ -380,5 +382,30 @@ export async function resetUserPasswordAction(
     });
   } catch (error) {
     return error;
+  }
+}
+
+export async function updateAccountStatusAction({id, is_verified}: {id: string; is_verified: boolean}){
+  try {
+   await updateAccountStatus({id, is_verified});
+    return true;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createAdminAction({
+  email,
+  password
+}: {
+  email: string;
+  password: string
+}){
+  try {
+    await createAdmin({email, password});
+    revalidatePath("/admin/dashboard/user");
+    return true;
+  } catch (error) {
+    throw error
   }
 }
