@@ -16,10 +16,11 @@ import {
   redirectIfNotAuthenticated,
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
+import UserInformation from "./_components/UserInformation";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
-  await redirectIfRoleNotAuthorized(["super-admin"], "/");
+  await redirectIfRoleNotAuthorized(["super-admin", "admin"], "/");
 
   return (
     <SidebarProvider>
@@ -36,13 +37,15 @@ export default async function page() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Garbage Schedules</BreadcrumbPage>
+                  <BreadcrumbPage>Settings</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex grow overflow-hidden"></div>
+        <div>
+          <UserInformation />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

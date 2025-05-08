@@ -44,11 +44,6 @@ const data = {
           url: "/admin/dashboard/hotline",
           allowedRole: ["super-admin"],
         },
-        {
-          title: "Garbage Schedules",
-          url: "/admin/dashboard/garbage-schedules",
-          allowedRole: ["super-admin"],
-        },
       ],
     },
     {

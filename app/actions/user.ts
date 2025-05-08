@@ -16,6 +16,8 @@ import { resetPassword } from "@/db/user/user";
 import { CreateLog } from "@/db/log/log";
 import { deleteResetPasswordTokenByToken } from "@/db/passwordResetToken/passwordResetToken";
 import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
+import { User } from "@/types";
 
 
 export async function registerUserAction(_1: any, formData: FormData) {
@@ -420,5 +422,16 @@ export async function resetUserPasswordByAdminAction(
     return true;
   } catch (error) {
     return error;
+  }
+}
+
+export async function getLoggedUserAction() {
+  try {
+    const session = await auth();
+    const user =  await getUserByEmail(session?.user.email!);
+     const data: User = JSON.parse(JSON.stringify(user));
+     return data;
+  } catch (error) {
+    throw error;
   }
 }
