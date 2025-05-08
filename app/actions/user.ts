@@ -4,7 +4,7 @@ import { createUser } from "@/db/user/user";
 import { RegisterSchema } from "@/lib/zod";
 import { RegisterType } from "@/lib/zod";
 import bcrypt from "bcryptjs";
-import { getUserByEmail } from "@/db/user/user";
+import { getUserByEmail, updateAccountStatus, createAdmin } from "@/db/user/user";
 import { getTokenByUserEmail } from "@/db/emailVerificationToken/emailVerificationToken";
 import { verifyToken } from "@/lib/utils";
 import { signToken } from "@/lib/utils";
@@ -15,6 +15,10 @@ import { insertNewPasswordResetToken } from "@/db/passwordResetToken/passwordRes
 import { resetPassword } from "@/db/user/user";
 import { CreateLog } from "@/db/log/log";
 import { deleteResetPasswordTokenByToken } from "@/db/passwordResetToken/passwordResetToken";
+import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
+import { User } from "@/types";
+
 
 export async function registerUserAction(_1: any, formData: FormData) {
   const user: RegisterType = {
@@ -380,5 +384,54 @@ export async function resetUserPasswordAction(
     });
   } catch (error) {
     return error;
+  }
+}
+
+export async function updateAccountStatusAction({id, is_verified}: {id: string; is_verified: boolean}){
+  try {
+   await updateAccountStatus({id, is_verified});
+    return true;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createAdminAction({
+  email,
+  password
+}: {
+  email: string;
+  password: string
+}){
+  try {
+    const hashedPassword = bcrypt.hashSync(password, 12);
+    await createAdmin({email, password: hashedPassword});
+    revalidatePath("/admin/dashboard/user");
+    return true;
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function resetUserPasswordByAdminAction(
+  email: string,
+  newPassword: string
+) {
+  try {
+    await resetPassword(email, newPassword);
+    return true;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getLoggedUserAction() {
+  try {
+    const session = await auth();
+    const user =  await getUserByEmail(session?.user.email!);
+     const data: User = JSON.parse(JSON.stringify(user));
+     return data;
+  } catch (error) {
+    throw error;
   }
 }

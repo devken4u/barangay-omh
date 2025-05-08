@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { BookOpenText, LucideIcon } from "lucide-react";
+import { BookOpenText, LucideIcon, User } from "lucide-react";
 
 import { AdminNavMain } from "@/components/admin-nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -24,6 +24,19 @@ const data = {
         {
           title: "Job Board",
           url: "/user/dashboard/job-board",
+          allowedRole: ["user"],
+        },
+      ],
+    },
+    {
+      title: "Profile",
+      url: "#",
+      icon: User,
+      isActive: true,
+      items: [
+        {
+          title: "Settings",
+          url: "/user/dashboard/profile-settings",
           allowedRole: ["user"],
         },
       ],

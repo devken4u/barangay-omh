@@ -17,7 +17,6 @@ export async function getUserByEmail(email: string) {
   //otherwise return null
   return null;
 }
-
 export async function createUser({
   email,
   firstname = "",
@@ -60,7 +59,6 @@ export async function createUser({
     return error;
   }
 }
-
 export async function verifyUserEmail(email: string) {
   try {
     const verifiedUser = await UserModel.findOneAndUpdate(
@@ -85,7 +83,6 @@ export async function verifyUserEmail(email: string) {
     return error;
   }
 }
-
 export async function resetPassword(email: string, newPassword: string) {
   try {
     const hashedPassword = bcrypt.hashSync(newPassword, 12);
@@ -103,5 +100,48 @@ export async function resetPassword(email: string, newPassword: string) {
     return false;
   } catch (error) {
     return error;
+  }
+}
+export async function getUsers(){
+  try {
+    await connectDB();
+    const users = await UserModel.find().sort({
+      createdAt: "desc"
+    });
+    return users;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function updateAccountStatus({id, is_verified}: {id: string; is_verified: boolean}){
+try {
+  await connectDB();
+  const user = await UserModel.findByIdAndUpdate(id, {
+    is_verified
+  })
+  return user;
+} catch (error) {
+  throw error;
+}
+}
+export async function createAdmin({
+  email,
+  password
+}: {
+  email: string;
+  password: string
+}){
+  try {
+    await connectDB();
+    const admin = await UserModel.create({
+      email,
+      password,
+      is_verified: true,
+      role: "admin",
+      email_type: "credentials"
+    })
+    return admin;
+  } catch (error) {
+    throw error
   }
 }
