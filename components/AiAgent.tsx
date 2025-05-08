@@ -1,9 +1,13 @@
+import { getChatbotPreference } from "@/db/websiteSettings/websiteSettings";
 import Script from "next/script";
 
-function AiAgent() {
-  return (
-    <Script id="chatbase-widget" strategy="afterInteractive">
-      {`
+async function AiAgent() {
+  const chatbotInitial: boolean = await getChatbotPreference();
+
+  if (chatbotInitial)
+    return (
+      <Script id="chatbase-widget" strategy="afterInteractive">
+        {`
     (function(){
       if(!window.chatbase || window.chatbase("getState")!=="initialized"){
         window.chatbase = (...arguments)=>{ 
@@ -28,8 +32,8 @@ function AiAgent() {
       else { window.addEventListener("load", onLoad) }
     })();
   `}
-    </Script>
-  );
+      </Script>
+    );
 }
 
 export default AiAgent;

@@ -126,6 +126,11 @@ const data = {
           url: "/admin/dashboard/log",
           allowedRole: ["super-admin"],
         },
+        {
+          title: "Preferences",
+          url: "/admin/dashboard/preferences",
+          allowedRole: ["super-admin"],
+        },
       ],
     },
     {
