@@ -143,7 +143,6 @@ export default function FeaturedPhotoCard({
           alt="featured-photo"
           className="size-full object-contain"
         />
-        /-{" "}
       </div>
       <div className="text-sm font-mono">
         <p>uploaded at:</p>

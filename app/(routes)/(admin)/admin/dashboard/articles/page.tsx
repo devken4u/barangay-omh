@@ -17,6 +17,7 @@ import {
   redirectIfRoleNotAuthorized,
 } from "@/lib/page-guard";
 import ArticleList from "./_components/ArticleList";
+import { auth } from "@/auth";
 
 export default async function page() {
   await redirectIfNotAuthenticated("/");
@@ -44,7 +45,7 @@ export default async function page() {
           </div>
         </header>
         <div className="flex grow overflow-hidden">
-          <ArticleList />
+          <ArticleList admin={true} />
         </div>
       </SidebarInset>
     </SidebarProvider>

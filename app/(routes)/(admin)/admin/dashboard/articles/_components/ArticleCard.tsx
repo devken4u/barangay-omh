@@ -1,8 +1,15 @@
 import { formateDateV1 } from "@/lib/utils";
 import { Article } from "@/types";
 import { ImageIcon } from "lucide-react";
+import DeleteArticle from "./DeleteArticle";
 
-function ArticleCard({ article }: { article: Article }) {
+function ArticleCard({
+  article,
+  admin = false,
+}: {
+  article: Article;
+  admin?: boolean;
+}) {
   return (
     <a
       className="border p-4 rounded-md block hover:cursor-pointer"
