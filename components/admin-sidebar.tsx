@@ -29,11 +29,11 @@ const data = {
       icon: House,
       isActive: true,
       items: [
-        {
-          title: "Featured Photo",
-          url: "/admin/dashboard/featured-photo",
-          allowedRole: ["super-admin"],
-        },
+        // {
+        //   title: "Featured Photo",
+        //   url: "/admin/dashboard/featured-photo",
+        //   allowedRole: ["super-admin"],
+        // },
         {
           title: "Announcement",
           url: "/admin/dashboard/announcement",

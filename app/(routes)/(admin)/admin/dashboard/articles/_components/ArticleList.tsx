@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-function ArticleList() {
+function ArticleList({ admin }: { admin: boolean }) {
   const [titleFilter, setTitleFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -71,7 +71,9 @@ function ArticleList() {
       {articles?.data && (
         <div className="grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-4 overflow-y-auto">
           {(articles?.data as Article[]).map((article) => {
-            return <ArticleCard key={article._id} article={article} />;
+            return (
+              <ArticleCard admin={admin} key={article._id} article={article} />
+            );
           })}
         </div>
       )}
