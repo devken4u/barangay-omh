@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-function ArticleList({ admin }: { admin: boolean }) {
+function ArticleList({ admin = false }: { admin?: boolean }) {
   const [titleFilter, setTitleFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
